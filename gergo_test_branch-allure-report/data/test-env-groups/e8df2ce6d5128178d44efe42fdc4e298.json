@@ -1,1 +1,1 @@
-{"id":"e8df2ce6d5128178d44efe42fdc4e298","fullName":"cart/cartManagement.spec.ts:8:7","name":"should login via UI, add products to cart, and verify cart via API","status":"passed","testResultsByEnv":{"default":"c91489432aa3b6cdfb282ff106713b21"}}
+{"id":"e8df2ce6d5128178d44efe42fdc4e298","fullName":"cart/cartManagement.spec.ts:8:7","name":"should login via UI, add products to cart, and verify cart via API","status":"passed","testResultsByEnv":{"default":"b6081f87adb7299d71b864d7b72e8f8e"}}
