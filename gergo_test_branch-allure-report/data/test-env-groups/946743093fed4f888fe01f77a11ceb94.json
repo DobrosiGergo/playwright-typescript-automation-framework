@@ -1,1 +1,1 @@
-{"id":"946743093fed4f888fe01f77a11ceb94","fullName":"api/tests/user/user.spec.ts:42:7","name":"should verify login with valid credentials","status":"passed","testResultsByEnv":{"default":"643079928777c1e021b71b4b8d2a3a56"}}
+{"id":"946743093fed4f888fe01f77a11ceb94","fullName":"api/tests/user/user.spec.ts:42:7","name":"should verify login with valid credentials","status":"passed","testResultsByEnv":{"default":"620193ddd05f1e82b11cc253c2835137"}}
