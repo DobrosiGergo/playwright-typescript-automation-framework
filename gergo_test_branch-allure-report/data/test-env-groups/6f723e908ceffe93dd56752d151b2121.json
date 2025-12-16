@@ -1,1 +1,1 @@
-{"id":"6f723e908ceffe93dd56752d151b2121","fullName":"ui/tests/checkout/orderCompletion.spec.ts:10:7","name":"should complete purchase flow and verify order confirmation","status":"passed","testResultsByEnv":{"default":"a764f77e0588a7655086d76954c29227"}}
+{"id":"6f723e908ceffe93dd56752d151b2121","fullName":"ui/tests/checkout/orderCompletion.spec.ts:10:7","name":"should complete purchase flow and verify order confirmation","status":"passed","testResultsByEnv":{"default":"eabb8e93cbc79ef12926b2782067960d"}}

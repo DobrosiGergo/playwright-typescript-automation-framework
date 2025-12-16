@@ -1,1 +1,1 @@
-{"id":"0ab84033f8bf052af5e3f3eb3f448a6c","fullName":"ui/tests/checkout/orderCompletion.spec.ts:110:7","name":"should handle checkout with single product","status":"passed","testResultsByEnv":{"default":"4c61dd9e0249d8f7e751f2918f1ecee1"}}
+{"id":"0ab84033f8bf052af5e3f3eb3f448a6c","fullName":"ui/tests/checkout/orderCompletion.spec.ts:110:7","name":"should handle checkout with single product","status":"broken","testResultsByEnv":{"default":"0bc084fef78c482db92bed333b230569"}}

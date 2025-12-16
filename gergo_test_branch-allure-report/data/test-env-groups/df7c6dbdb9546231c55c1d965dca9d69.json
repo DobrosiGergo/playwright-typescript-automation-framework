@@ -1,1 +1,1 @@
-{"id":"df7c6dbdb9546231c55c1d965dca9d69","fullName":"api/tests/user/user.spec.ts:74:7","name":"should return error for invalid login credentials","status":"passed","testResultsByEnv":{"default":"cddfa4d89a1d15adf0f530256e0646ca"}}
+{"id":"df7c6dbdb9546231c55c1d965dca9d69","fullName":"api/tests/user/user.spec.ts:74:7","name":"should return error for invalid login credentials","status":"passed","testResultsByEnv":{"default":"b7fd9640fc1495711e19f8fb19b1fca5"}}
