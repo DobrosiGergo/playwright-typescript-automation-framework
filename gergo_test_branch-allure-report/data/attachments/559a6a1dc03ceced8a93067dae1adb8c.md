@@ -1,0 +1,93 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e5]:
+      - link "Automation Exercise website" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img "Automation Exercise website" [ref=e9]
+      - list [ref=e12]:
+        - listitem [ref=e13]:
+          - link " Home" [ref=e14] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e15]: 
+            - text: Home
+        - listitem [ref=e16]:
+          - link " Products" [ref=e17] [cursor=pointer]:
+            - /url: /products
+            - generic [ref=e18]: 
+            - text: Products
+        - listitem [ref=e19]:
+          - link " Cart" [ref=e20] [cursor=pointer]:
+            - /url: /view_cart
+            - generic [ref=e21]: 
+            - text: Cart
+        - listitem [ref=e22]:
+          - link " Logout" [ref=e23] [cursor=pointer]:
+            - /url: /logout
+            - generic [ref=e24]: 
+            - text: Logout
+        - listitem [ref=e25]:
+          - link " Delete Account" [ref=e26] [cursor=pointer]:
+            - /url: /delete_account
+            - generic [ref=e27]: 
+            - text: Delete Account
+        - listitem [ref=e28]:
+          - link " Test Cases" [ref=e29] [cursor=pointer]:
+            - /url: /test_cases
+            - generic [ref=e30]: 
+            - text: Test Cases
+        - listitem [ref=e31]:
+          - link " API Testing" [ref=e32] [cursor=pointer]:
+            - /url: /api_list
+            - generic [ref=e33]: 
+            - text: API Testing
+        - listitem [ref=e34]:
+          - link " Video Tutorials" [ref=e35] [cursor=pointer]:
+            - /url: https://www.youtube.com/c/AutomationExercise
+            - generic [ref=e36]: 
+            - text: Video Tutorials
+        - listitem [ref=e37]:
+          - link " Contact us" [ref=e38] [cursor=pointer]:
+            - /url: /contact_us
+            - generic [ref=e39]: 
+            - text: Contact us
+        - listitem [ref=e40]:
+          - generic [ref=e41]:
+            - generic [ref=e42]: 
+            - text: Logged in as TestFirst1 TestLast1
+  - generic [ref=e46]:
+    - heading "Order Placed!" [level=2] [ref=e47]
+    - paragraph [ref=e48]: Congratulations! Your order has been confirmed!
+    - link "Download Invoice" [ref=e49] [cursor=pointer]:
+      - /url: /download_invoice/500
+    - link "Continue" [ref=e51] [cursor=pointer]:
+      - /url: /
+  - contentinfo [ref=e52]:
+    - generic [ref=e57]:
+      - heading "Subscription" [level=2] [ref=e58]
+      - generic [ref=e59]:
+        - textbox "Your email address" [ref=e60]
+        - button "" [ref=e61] [cursor=pointer]:
+          - generic [ref=e62]: 
+        - paragraph [ref=e63]:
+          - text: Get the most recent updates from
+          - text: our site and be updated your self...
+    - paragraph [ref=e67]: Copyright © 2021 All rights reserved
+  - text: 
+  - generic:
+    - insertion:
+      - generic:
+        - iframe
+  - insertion [ref=e68]:
+    - iframe [ref=e71]:
+      - generic [active] [ref=f98e1]:
+        - generic [ref=f98e3]:
+          - link:
+            - /url: https://googleads.g.doubleclick.net/aclk?nis=4&sa=l&ai=CXzIFAiVBadruC8K948APmOCe2QXXgYCRhAGUrO2vsRTb2R4QASD9tJ6VAWC7BqABnZnL_D_IAQKpAoKfGvtCt7M-qAMByAPJBKoEgAJP0MYTLzRnksHd5OJYgan5AuBZ5gE8OJeGwJs5Zv5tMomcR6gwIaliQ37AdoFOLAi5Nhn6TjvIB_LlU4GtvohegGa6A6fpC8_LvLHjx4t2WyNeoVUDkMQ-BQfs6jrL0eeJ1voSN3JDozFVjKYJCrq_ICphO1wWnTYqeTh6pwwPFzLyDUgLeyqfo-ZBq7-JQ8avJuC6q8QhWTbVoe1k33FiBjorWUeI_885yeq5rfLFnJ2DLw1cKv6oi-0L9igCUIr_8ITZOUU0Pb_rty3X4T14__PGxW5SOGegEe6oYH2W-l0nse3i0F53djFKsQs3O3tJA-mQTbgMSZyHufV90ktQwATd84yUpwWIBd2QgYZVoAYCgAed0ZvcGqgHp8yxAqgHpr4bqAfMzrECqAfz0RuoB5bYG6gHqpuxAqgHjs4bqAeT2BuoB_DgG6gH7paxAqgH_p6xAqgHr76xAqgH1ckbqAfZtrECqAeaBqgH_56xAqgH35-xAqgHyqmxAqgH66WxAqgH6rGxAqgHmbWxAqgHvrexAqgH-MKxAqgH-8KxAtgHAdIIMQiR4YBQEAEYnwMyCKuLgICAgIAKOg2AQIDAgICAgKiAAqgDSL39wTpYztjSt-TBkQOxCSFf9m2DPwiFgAoBmAsByAsB2gwQCgoQgMfmgbPrx549EgIBA6oNAkdCyA0B8A0CiA4J2BMC0BUByhYCCgD4FgGAFwGyFwIYAboXAjgBshgJEgK4UBgCIgEA0BgBwhkCCAE&ae=1&ase=2&gclid=EAIaIQobChMI2vfSt-TBkQMVwt4YAh0YsCdbEAEYASAAEgLsK_D_BwE&num=1&sig=AOD64_1Wn63uUDhx2BhSCZ8Os0p1Zag9BQ&client=ca-pub-1677597403311019&rf=2&nb=2&adurl=https://mtdt.io/%3Futm_source%3Dgoogle%26utm_medium%3Dcpc%26utm_campaign%3Dcid_22829615197%26gad_source%3D5%26gad_campaignid%3D22829615197%26gclid%3DEAIaIQobChMI2vfSt-TBkQMVwt4YAh0YsCdbEAEYASAAEgLsK_D_BwE
+          - img [ref=f98e7] [cursor=pointer]
+          - button [ref=f98e10] [cursor=pointer]:
+            - img [ref=f98e11]
+        - iframe
+```

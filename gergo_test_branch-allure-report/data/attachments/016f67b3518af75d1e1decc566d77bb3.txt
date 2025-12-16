@@ -1,0 +1,5 @@
+Starting Cart Management test suite
+Network idle timeout, continuing with DOM ready state
+No cookie consent dialog detected or already handled
+No cookie consent dialog detected or already handled
+No cookie consent dialog detected or already handled

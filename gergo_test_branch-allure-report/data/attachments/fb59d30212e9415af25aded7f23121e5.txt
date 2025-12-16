@@ -1,0 +1,82 @@
+Starting Order Completion test suite
+Network idle timeout, continuing with DOM ready state
+No cookie consent dialog detected or already handled
+No cookie consent dialog detected or already handled
+Cleanup failed: apiRequestContext.get: Request context disposed.
+Call log:
+  - → GET https://automationexercise.com/login
+    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.7499.4 Safari/537.36
+    - accept: */*
+    - accept-encoding: gzip,deflate,br
+
+    at UserService.fetchCsrfToken (/home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/api/base/baseApiClient.service.ts:30:41)
+    at UserService.delete (/home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/api/base/baseApiClient.service.ts:133:34)
+    at UserService.deleteUser (/home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/api/services/user.service.ts:81:29)
+    at /home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/ui/tests/checkout/orderCompletion.spec.ts:154:27
+    at /home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/ui/tests/checkout/orderCompletion.spec.ts:151:16 {
+  name: 'Error',
+  Symbol(step): {
+    location: {
+      file: '/home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/api/base/baseApiClient.service.ts',
+      line: 30,
+      column: 41,
+      function: 'UserService.fetchCsrfToken'
+    },
+    category: 'pw:api',
+    title: 'GET "/login"',
+    apiName: 'apiRequestContext.get',
+    params: {
+      url: 'https://automationexercise.com/login',
+      params: undefined,
+      encodedParams: undefined,
+      method: 'GET',
+      headers: undefined,
+      postData: undefined,
+      jsonData: undefined,
+      formData: undefined,
+      multipartData: undefined,
+      timeout: 30000,
+      failOnStatusCode: undefined,
+      ignoreHTTPSErrors: undefined,
+      maxRedirects: undefined,
+      maxRetries: undefined,
+      __testHookLookup: undefined
+    },
+    group: undefined,
+    stepId: 'pw:api@221',
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@221',
+      _title: 'GET "/login"',
+      _parentStep: [TestStepInfoImpl],
+      skip: [Function (anonymous)]
+    },
+    complete: [Function: complete],
+    endWallTime: 1765877028246,
+    error: {
+      message: 'Error: apiRequestContext.get: Request context disposed.\n' +
+        'Call log:\n' +
+        '\x1B[2m  - → GET https://automationexercise.com/login\x1B[22m\n' +
+        '\x1B[2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.7499.4 Safari/537.36\x1B[22m\n' +
+        '\x1B[2m    - accept: */*\x1B[22m\n' +
+        '\x1B[2m    - accept-encoding: gzip,deflate,br\x1B[22m\n',
+      stack: 'Error: apiRequestContext.get: Request context disposed.\n' +
+        'Call log:\n' +
+        '\x1B[2m  - → GET https://automationexercise.com/login\x1B[22m\n' +
+        '\x1B[2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.7499.4 Safari/537.36\x1B[22m\n' +
+        '\x1B[2m    - accept: */*\x1B[22m\n' +
+        '\x1B[2m    - accept-encoding: gzip,deflate,br\x1B[22m\n' +
+        '\n' +
+        '    at UserService.fetchCsrfToken (/home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/api/base/baseApiClient.service.ts:30:41)\n' +
+        '    at UserService.delete (/home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/api/base/baseApiClient.service.ts:133:34)\n' +
+        '    at UserService.deleteUser (/home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/api/services/user.service.ts:81:29)\n' +
+        '    at /home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/ui/tests/checkout/orderCompletion.spec.ts:154:27\n' +
+        '    at /home/runner/work/playwright-typescript-automation-framework/playwright-typescript-automation-framework/src/ui/tests/checkout/orderCompletion.spec.ts:151:16',
+      cause: undefined
+    }
+  }
+}

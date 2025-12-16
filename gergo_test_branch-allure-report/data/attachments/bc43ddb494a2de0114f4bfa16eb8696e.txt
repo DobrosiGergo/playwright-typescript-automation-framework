@@ -1,0 +1,4 @@
+Starting Authentication Negative Tests
+Network idle timeout, continuing with DOM ready state
+No cookie consent dialog detected or already handled
+No cookie consent dialog detected or already handled

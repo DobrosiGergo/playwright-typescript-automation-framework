@@ -1,1 +1,1 @@
-{"id":"cf25227a199ceec5f52c3e7a85b5f133","fullName":"ui/tests/authentication/authentication.spec.ts:171:9","name":"should handle empty required fields during registration","status":"passed","testResultsByEnv":{"default":"b97540e962603933cfce18c9438aa7ad"}}
+{"id":"cf25227a199ceec5f52c3e7a85b5f133","fullName":"ui/tests/authentication/authentication.spec.ts:171:9","name":"should handle empty required fields during registration","status":"broken","testResultsByEnv":{"default":"5645fb67d2a3f6483e119d694974df1c"}}
