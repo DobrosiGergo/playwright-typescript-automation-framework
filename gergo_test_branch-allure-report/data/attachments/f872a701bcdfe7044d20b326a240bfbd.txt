@@ -1,0 +1,2 @@
+Starting Authentication Negative Tests
+No cookie consent dialog detected or already handled

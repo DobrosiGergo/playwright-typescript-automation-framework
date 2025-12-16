@@ -1,0 +1,4 @@
+Starting Cart Management test suite
+No cookie consent dialog detected or already handled
+No cookie consent dialog detected or already handled
+Checkout correctly requires login

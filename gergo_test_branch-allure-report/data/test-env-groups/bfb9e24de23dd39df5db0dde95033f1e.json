@@ -1,1 +1,1 @@
-{"id":"bfb9e24de23dd39df5db0dde95033f1e","fullName":"ui/tests/cart/cartManagement.spec.ts:66:7","name":"should handle basic cart operations without login","status":"broken","testResultsByEnv":{"default":"48c042c953c67b29b94ebb46b3eb89f2"}}
+{"id":"bfb9e24de23dd39df5db0dde95033f1e","fullName":"ui/tests/cart/cartManagement.spec.ts:66:7","name":"should handle basic cart operations without login","status":"passed","testResultsByEnv":{"default":"10582dea587c432f53cd3da5f66c8131"}}
