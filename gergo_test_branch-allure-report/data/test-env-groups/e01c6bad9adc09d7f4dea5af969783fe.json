@@ -1,1 +1,1 @@
-{"id":"e01c6bad9adc09d7f4dea5af969783fe","fullName":"authentication/authentication.spec.ts:200:9","name":"should validate login with non-existent user via API","status":"passed","testResultsByEnv":{"default":"8ed193a8a775a30ba54246909b92e473"}}
+{"id":"e01c6bad9adc09d7f4dea5af969783fe","fullName":"authentication/authentication.spec.ts:200:9","name":"should validate login with non-existent user via API","status":"passed","testResultsByEnv":{"default":"b846d138da28218f9dbfd99e2b21e957"}}
