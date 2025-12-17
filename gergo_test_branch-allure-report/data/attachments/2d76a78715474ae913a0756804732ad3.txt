@@ -1,0 +1,4 @@
+Starting User Registration test suite
+No cookie consent dialog detected or already handled
+User registration verified:  TestFirst495 TestLast495
+Note: User account created will remain due to API CSRF protection - this is expected for automation exercise
