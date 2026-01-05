@@ -1,1 +1,1 @@
-{"id":"7610ed17b3c740b92b5b08b52c91217e","fullName":"authentication/authentication.spec.ts:160:9","name":"should handle invalid email format during registration","status":"passed","testResultsByEnv":{"default":"28d6f1c08823b6b0546327c8673f9650"}}
+{"id":"7610ed17b3c740b92b5b08b52c91217e","fullName":"authentication/authentication.spec.ts:164:9","name":"should handle invalid email format during registration","status":"passed","testResultsByEnv":{"default":"21a9fe4ede044bdea0b54a33a4782575"}}

@@ -1,1 +1,1 @@
-{"id":"6dfe81c61d070380f07b0f88fd876cbf","fullName":"cart/cartManagement.spec.ts:122:7","name":"should require login for checkout process","status":"passed","testResultsByEnv":{"default":"cc0c3d5fc066e165719b77b685a9391c"}}
+{"id":"6dfe81c61d070380f07b0f88fd876cbf","fullName":"cart/cartManagement.spec.ts:124:7","name":"should require login for checkout process","status":"passed","testResultsByEnv":{"default":"78b9cd0f9a7807b77df76df28c25871a"}}
