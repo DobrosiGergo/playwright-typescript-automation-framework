@@ -1,1 +1,1 @@
-{"id":"beaafe7a86955f48106b1984be96b34b","fullName":"backend/user.spec.ts:76:7","name":"should return error for non-existent user email","status":"passed","testResultsByEnv":{"default":"1a3d2509b31c9b2fe9448016e1c37d36"}}
+{"id":"beaafe7a86955f48106b1984be96b34b","fullName":"backend/user.spec.ts:76:7","name":"should return error for non-existent user email","status":"passed","testResultsByEnv":{"default":"f6efcff9e90ed00466df330a78432bf1"}}

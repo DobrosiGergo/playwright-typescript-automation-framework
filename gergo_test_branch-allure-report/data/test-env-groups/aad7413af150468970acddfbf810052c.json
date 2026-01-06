@@ -1,1 +1,1 @@
-{"id":"aad7413af150468970acddfbf810052c","fullName":"authentication/authentication.spec.ts:8:9","name":"should register new user via UI and verify user creation via API","status":"passed","testResultsByEnv":{"default":"14ecbda655f84030aa8cf8ec50240b8c"}}
+{"id":"aad7413af150468970acddfbf810052c","fullName":"authentication/authentication.spec.ts:8:9","name":"should register new user via UI and verify user creation via API","status":"passed","testResultsByEnv":{"default":"c25a2adf8b2b227d937e34040505975b"}}

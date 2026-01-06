@@ -1,1 +1,1 @@
-{"id":"0a7c9f25cac8273c20ebc6ea5681c690","fullName":"authentication/authentication.spec.ts:135:9","name":"should handle invalid user data during API registration","status":"passed","testResultsByEnv":{"default":"b15e4f68d5ecaf243fa6837adceabb27"}}
+{"id":"0a7c9f25cac8273c20ebc6ea5681c690","fullName":"authentication/authentication.spec.ts:135:9","name":"should handle invalid user data during API registration","status":"passed","testResultsByEnv":{"default":"86607f305916d64d2c121822de1634c9"}}
