@@ -1,1 +1,1 @@
-{"id":"f0332ff4030c909a7183020db38dc4d3","fullName":"standalone/booking/booking.spec.ts:166:7","name":"should reject update without authentication token","status":"passed","testResultsByEnv":{"default":"a5f0c1940014b702b423a48342b43cc2"}}
+{"id":"f0332ff4030c909a7183020db38dc4d3","fullName":"standalone/booking/booking.spec.ts:166:7","name":"should reject update without authentication token","status":"passed","testResultsByEnv":{"default":"8aabcdf14cbd58d29d7dfcc8397c10eb"}}
