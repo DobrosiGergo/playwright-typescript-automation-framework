@@ -1,1 +1,1 @@
-{"id":"1c7028e45bc4f9e6d2f04789a0395e9b","fullName":"standalone/booking/booking.spec.ts:215:7","name":"should reject delete without authentication token","status":"passed","testResultsByEnv":{"default":"55c5990615bc912b9aa48d0a1aa56afc"}}
+{"id":"1c7028e45bc4f9e6d2f04789a0395e9b","fullName":"standalone/booking/booking.spec.ts:181:7","name":"should reject delete without authentication token","status":"passed","testResultsByEnv":{"default":"c467ce5da8a7daf02f5cb662edf0cd28"}}

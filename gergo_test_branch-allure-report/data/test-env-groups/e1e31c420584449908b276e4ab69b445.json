@@ -1,1 +1,1 @@
-{"id":"e1e31c420584449908b276e4ab69b445","fullName":"authentication/authentication.spec.ts:64:9","name":"should display error for duplicate email registration","status":"passed","testResultsByEnv":{"default":"6724d5ce089ade20bb39b3b7f8873f09"}}
+{"id":"e1e31c420584449908b276e4ab69b445","fullName":"authentication/authentication.spec.ts:32:9","name":"should display error for duplicate email registration","status":"passed","testResultsByEnv":{"default":"6cc773bc5be01799821ab417f610a03e"}}
