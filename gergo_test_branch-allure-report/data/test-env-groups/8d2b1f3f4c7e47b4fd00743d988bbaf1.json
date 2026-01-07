@@ -1,1 +1,1 @@
-{"id":"8d2b1f3f4c7e47b4fd00743d988bbaf1","fullName":"standalone/booking/booking.spec.ts:194:7","name":"should return 404 for non-existent booking","status":"passed","testResultsByEnv":{"default":"e6225daffc6c5fd45b82bc073fc43e43"}}
+{"id":"8d2b1f3f4c7e47b4fd00743d988bbaf1","fullName":"standalone/booking/booking.spec.ts:194:7","name":"should return 404 for non-existent booking","status":"passed","testResultsByEnv":{"default":"8f0125cdca7801b88e47df13c2b8dc99"}}
