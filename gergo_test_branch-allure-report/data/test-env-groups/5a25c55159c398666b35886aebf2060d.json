@@ -1,1 +1,1 @@
-{"id":"5a25c55159c398666b35886aebf2060d","fullName":"backend/user.spec.ts:29:7","name":"should verify login with valid credentials","status":"passed","testResultsByEnv":{"default":"186d140dc984883b8972cc749185578c"}}
+{"id":"5a25c55159c398666b35886aebf2060d","fullName":"backend/user.spec.ts:29:7","name":"should verify login with valid credentials","status":"passed","testResultsByEnv":{"default":"26f207b92ac6de7527ebc43ad8557945"}}
