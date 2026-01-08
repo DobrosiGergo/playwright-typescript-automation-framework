@@ -41,6 +41,7 @@ It is referenced by Copilot and reviewers to ensure tests are expressive, reliab
   - **Single Assertion:** When a test has only one assertion, use a hard assertion (`expect()`).
   - **Purpose:** Soft assertions collect all failures without stopping execution, while the final hard assertion ensures the test fails.
   - **Example:**
+
     ```typescript
     test('should verify user details', async ({ userService }) => {
       const response = await userService.getUserByEmail(email);
