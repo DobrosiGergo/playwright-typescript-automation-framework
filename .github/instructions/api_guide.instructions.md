@@ -150,34 +150,37 @@ export async function getTeams({ slug, authToken }: GetTeamsParams): Promise<Tea
 ## Implementation Guidelines
 
 - **Centralize API Calls**
-  - Each feature service file exports functions built on the shared base request.
-  - Tests call service functions, never raw `fetch` or duplicated logic.
+  - Each feature service class extends `BaseApiClient` located in `tests/api/clients/`.
+  - Tests call service methods via fixtures, never raw `fetch` or duplicated logic.
+  - Service classes are instantiated with Playwright's `APIRequestContext`.
 
 - **Use TypeScript for Maintainability**
-  - Define request/response types and schemas in `src/api/data/` or `shared/data/`.
-  - Pair generics (`baseApiRequest<TResponse>`) with schema validators to ensure type safety.
+  - Define request/response types and data factories in `tests/api/data/`.
+  - Define payload builders in `tests/api/data/` (e.g., `userPayloads.ts`, `bookingPayloads.ts`).
+  - Use TypeScript interfaces for type safety without runtime schema validation.
 
-- **Fixtures for Auth and Dependencies**
-  - Use Playwright fixtures to inject service functions and auth tokens.
-  - Example:
+- **Fixtures for Auth and Service Injection**
+  - Use Playwright fixtures to inject service instances and auth tokens.
+  - Example from project:
     ```ts
-    export const apiTest = test.extend<{
-      authToken: string;
-      teamService: typeof getTeams;
+    // tests/api/fixtures/backendFixtures.ts
+    export const test = base.extend<{
+      userService: UserService;
+      productService: ProductService;
     }>({
-      authToken: async ({ request }, use) => {
-        const token = await resolveAuthToken(request);
-        await use(token);
+      userService: async ({ request }, use) => {
+        await use(new UserService(request));
       },
-      teamService: async ({ authToken }, use) => {
-        await use((params) => getTeams({ ...params, authToken }));
+      productService: async ({ request }, use) => {
+        await use(new ProductService(request));
       },
     });
     ```
 
 - **Logging & Allure**
+  - Use `Logger.info()` and `Logger.error()` from `tests/common/utils/logger.util.ts`.
+  - BaseApiClient automatically logs failed requests with full details.
   - Attach request/response payloads to Allure when tests fail.
-  - Use shared logging utilities for diagnostics.
 
 ---
 
@@ -229,14 +232,20 @@ export const ServiceFactory = {
 
 Organize tests into **Positive** and **Negative** test suites with shared test data setup:
 
-### Recommended Structure
+### Recommended Structure (Actual Project Example)
 
 ```ts
+// tests/api/specs/backend/user.spec.ts
 import { test, expect } from '../../fixtures/backendFixtures';
 import { StatusCodes } from 'http-status-codes';
+import { faker } from '@faker-js/faker';
 import { ServiceFactory } from '../../factories/serviceFactory';
 import { UserDataFactory } from '../../../common/utils/userDataFactory';
 
+/**
+ * User API Tests - Backend API validation for UI testing
+ * Tests user-related API endpoints for automationexercise.com
+ */
 test.describe('User Backend API @api @backend @critical', () => {
   test.describe('Positive Test Cases @smoke', () => {
     let testUser: ReturnType<typeof UserDataFactory.generateUserData>;
@@ -275,6 +284,17 @@ test.describe('User Backend API @api @backend @critical', () => {
       expect.soft(loginResponseJson.responseCode).toBe(StatusCodes.OK);
       expect(loginResponseJson.message).toContain('User exists!');
     });
+
+    test('should get user details by email', async ({ userService }) => {
+      const getUserResponse = await userService.getUserByEmail(testUser.email);
+      expect.soft(getUserResponse.status()).toBe(StatusCodes.OK);
+
+      const userData = await getUserResponse.json();
+      expect.soft(userData.user.email).toBe(testUser.email);
+      expect.soft(userData.user.name).toBe(testUser.name);
+      expect.soft(userData.user.first_name).toBe(testUser.firstname);
+      expect(userData.user.last_name).toBe(testUser.lastname);
+    });
   });
 
   test.describe('Negative Test Cases @negative', () => {
@@ -288,6 +308,15 @@ test.describe('User Backend API @api @backend @critical', () => {
       const responseJson = await loginResponse.json();
       expect.soft(responseJson.responseCode).toBe(StatusCodes.NOT_FOUND);
       expect(responseJson.message).toContain('User not found!');
+    });
+
+    test('should return error for non-existent user email', async ({ userService }) => {
+      const getUserResponse = await userService.getUserByEmail(faker.internet.email());
+      expect.soft(getUserResponse.status()).toBe(StatusCodes.OK);
+
+      const responseJson = await getUserResponse.json();
+      expect.soft(responseJson.responseCode).toBe(StatusCodes.NOT_FOUND);
+      expect(responseJson.message).toContain('Account not found');
     });
   });
 });
@@ -330,22 +359,78 @@ test.describe('User Backend API @api @backend @critical', () => {
 
 ---
 
-## Example Test
+## Example Test (Standalone API)
 
 ```ts
-import { apiTest } from '../../fixtures/apiFixtures';
-import { getTeams } from '../../services/team.service';
-import { teamsResponseSchema } from '../../data/team.schema';
+// tests/api/specs/standalone/booking/booking.spec.ts
+import { test, expect } from '../../../fixtures/apiFixtures';
+import { StatusCodes } from 'http-status-codes';
+import { BookingDataFactory } from '../../../data/bookingDataFactory';
+import { ServiceFactory } from '../../../factories/serviceFactory';
 
-apiTest.describe('API | Teams', () => {
-  apiTest('should return teams for a valid slug', async ({ authToken }) => {
-    const teams = await getTeams({ authToken, slug: 'qa-department' });
-    const parsed = teamsResponseSchema.parse(teams);
-    expect(parsed[0].slug).toBe('qa-department');
+/**
+ * Booking API Tests - CRUD operations
+ * Tests restful-booker.herokuapp.com API
+ */
+test.describe('Booking API @api @standalone @critical', () => {
+  test.describe('Positive Test Cases @smoke', () => {
+    let sharedBooking: ReturnType<typeof BookingDataFactory.generateBooking>;
+    let sharedBookingId: number;
+    let authToken: string;
+
+    test.beforeAll(async ({ authService, defaultCredentials }) => {
+      // Create shared booking using ServiceFactory
+      sharedBooking = BookingDataFactory.generateBooking();
+      const createResponse = await ServiceFactory.booking.createBooking(sharedBooking);
+      const createBody = await createResponse.json();
+      sharedBookingId = createBody.bookingid;
+
+      // Get auth token using fixture-based service
+      const authResponse = await authService.createToken(defaultCredentials);
+      const authBody = await authResponse.json();
+      authToken = authBody.token;
+    });
+
+    test.afterAll(async () => {
+      // Cleanup: delete booking
+      if (sharedBookingId && authToken) {
+        await ServiceFactory.booking.deleteBooking(sharedBookingId, authToken);
+      }
+    });
+
+    test('should create a new booking and verify details', async ({
+      bookingService,
+      uniqueBooking,
+    }) => {
+      const response = await bookingService.createBooking(uniqueBooking);
+      expect.soft(response.status()).toBe(StatusCodes.OK);
+
+      const responseBody = await response.json();
+      expect.soft(responseBody.booking.firstname).toBe(uniqueBooking.firstname);
+      expect.soft(responseBody.booking.totalprice).toBe(uniqueBooking.totalprice);
+      expect(responseBody.bookingid).toBeDefined();
+    });
+
+    test('should update an existing booking', async ({ bookingService, authToken }) => {
+      const updatedBooking = BookingDataFactory.generateUpdatedBooking(sharedBooking);
+      const response = await bookingService.updateBooking(
+        sharedBookingId,
+        updatedBooking,
+        authToken,
+      );
+
+      expect.soft(response.status()).toBe(StatusCodes.OK);
+      const updatedData = await response.json();
+      expect(updatedData.totalprice).toBe(updatedBooking.totalprice);
+    });
   });
 
-  apiTest('should fail for missing auth token', async () => {
-    await expect(getTeams({ authToken: '', slug: 'qa-department' })).rejects.toThrow(/401/);
+  test.describe('Negative Test Cases @negative', () => {
+    test('should return 404 for non-existent booking', async ({ bookingService }) => {
+      const nonExistentId = BookingDataFactory.generateNonExistentBookingId();
+      const response = await bookingService.getBookingById(nonExistentId);
+      expect(response.status()).toBe(StatusCodes.NOT_FOUND);
+    });
   });
 });
 ```

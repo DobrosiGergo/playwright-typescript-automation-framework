@@ -19,7 +19,6 @@ tools:
     'search',
     'web',
     'agent',
-    'playwright/*',
     'todo',
   ]
 model: Claude Sonnet 4.5
