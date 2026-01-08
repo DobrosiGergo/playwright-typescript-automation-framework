@@ -16,10 +16,10 @@ It is referenced by Copilot and reviewers to ensure code is modular, maintainabl
 ## 1. Page Object Model (POM) – UI
 
 - Encapsulate UI structure and actions in page object classes.
-- Place feature-specific page objects in `src/ui/po/<feature>/` as `<feature>.page.ts` (e.g., `room.page.ts`).
-- Page object class names must use PascalCase and end with `Page` (e.g., `RoomPage`).
-- All page objects must extend `BasePage` from `src/ui/po/base/basePage.page.ts`.
-- Compose page objects from reusable components imported from `src/ui/po/components/`.
+- Place feature-specific page objects in `tests/ui/po/<feature>/` as `<feature>.page.ts` (e.g., `products.page.ts`).
+- Page object class names must use PascalCase and end with `Page` (e.g., `ProductsPage`).
+- All page objects must extend `BasePage` from `tests/ui/po/base/basePage.page.ts`.
+- Compose page objects from reusable components imported from `tests/ui/po/components/`.
 - **Never** use direct Playwright calls or locators in test specs; always interact through page objects or components.
 
 ---
@@ -27,11 +27,11 @@ It is referenced by Copilot and reviewers to ensure code is modular, maintainabl
 ## 2. Component Pattern – UI
 
 - Encapsulate reusable UI fragments (headers, modals, widgets, etc.) as components.
-- Place all components in `src/ui/po/components/` as `<feature>.component.ts` (e.g., `roomDivider.component.ts`).
-- **Common components** (used across multiple features, e.g., Navbar, Footer, Sidebar) must be placed in `src/ui/po/components/common/` (e.g., `navbar.component.ts`).
+- Place all components in `tests/ui/po/components/` as `<feature>.component.ts` (e.g., `productCard.component.ts`).
+- **Common components** (used across multiple features, e.g., Navbar, ProductCard, Search) must be placed in `tests/ui/po/components/common/` (e.g., `navbar.component.ts`).
   - This supports the Singleton pattern and DRY methodology—ensuring only one implementation is reused everywhere.
 - Component class names must use PascalCase and end with `Component` (e.g., `NavbarComponent`).
-- All components must extend `BaseComponent` from `src/ui/po/base/baseComponent.component.ts`.
+- All components must extend `BaseComponent` from `tests/ui/po/base/baseComponent.component.ts`.
 - **Do not** place components inside feature folders; always import from `components/` into page objects as needed.
 
 ---
@@ -50,9 +50,9 @@ It is referenced by Copilot and reviewers to ensure code is modular, maintainabl
 ## 3. Service Pattern – API
 
 - Encapsulate API endpoints and business logic in service classes.
-- Place base/abstract clients in `src/api/base/` as `baseApiClient.service.ts`.
-- Place feature-specific services in `src/api/services/` as `<feature>.service.ts` (e.g., `user.service.ts`).
-- Service class names must use PascalCase and end with `Service` (e.g., `UserService`).
+- Place base/abstract clients in `tests/api/clients/` as `baseApiClient.service.ts`.
+- Place feature-specific services in `tests/api/clients/` as `<feature>.service.ts` (e.g., `user.service.ts`, `booking.service.ts`).
+- Service class names must use PascalCase and end with `Service` (e.g., `UserService`, `BookingService`).
 - All service classes must extend `BaseApiClient`.
 - **Never** use direct API calls in test specs; always interact through service classes.
 
@@ -61,7 +61,11 @@ It is referenced by Copilot and reviewers to ensure code is modular, maintainabl
 ## 4. Factory & Builder Patterns – UI & API
 
 - Generate test data and objects using factories or builders.
-- Place these utilities in `src/ui/utils/`, `src/api/utils/`, `src/ui/data/`, or `src/api/data/`.
+- Place these utilities in:
+  - UI: `tests/common/utils/` for data factories (e.g., `userDataFactory.ts`, `paymentDataFactory.ts`)
+  - API: `tests/api/data/` for data factories (e.g., `bookingDataFactory.ts`, `authDataFactory.ts`)
+  - API: `tests/api/data/` for payload builders (e.g., `userPayloads.ts`, `bookingPayloads.ts`)
+  - API: `tests/api/factories/` for service factories (e.g., `userServiceFactory.ts`)
 - Avoid hardcoded data in specs; always use factories/builders for data setup.
 
 ---
@@ -69,7 +73,10 @@ It is referenced by Copilot and reviewers to ensure code is modular, maintainabl
 ## 5. Dependency Injection (DI) – UI & API
 
 - Inject page objects, components, services, or data into tests using Playwright fixtures.
-- Define fixtures in `src/ui/fixtures/`, `src/api/fixtures/`, or `shared/fixtures/`.
+- Define fixtures in:
+  - UI: `tests/ui/fixtures/` (e.g., `uiFixtures.ts`)
+  - API: `tests/api/fixtures/` (e.g., `apiFixtures.ts`, `backendFixtures.ts`)
+  - Common: `tests/common/fixtures/` for shared fixtures
 - Pass dependencies via constructor or fixture context, not as globals.
 
 ---
@@ -79,6 +86,21 @@ It is referenced by Copilot and reviewers to ensure code is modular, maintainabl
 - Centralize setup/teardown and recurring flows (e.g., login, token setup) in fixtures.
 - Place fixtures in the appropriate `fixtures/` directory.
 - Use fixtures for context setup, authentication, or shared state.
+- Example fixture from project:
+  ```ts
+  // tests/api/fixtures/backendFixtures.ts
+  export const test = base.extend<{
+    userService: UserService;
+    productService: ProductService;
+  }>({
+    userService: async ({ request }, use) => {
+      await use(new UserService(request));
+    },
+    productService: async ({ request }, use) => {
+      await use(new ProductService(request));
+    },
+  });
+  ```
 
 ---
 

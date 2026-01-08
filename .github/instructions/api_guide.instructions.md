@@ -15,12 +15,12 @@ All API-focused tests and services must follow this guide.
 
 This framework supports **two distinct API testing approaches**:
 
-1. **Standalone API Testing** (`src/api/standalone/`):
+1. **Standalone API Testing** (`tests/api/specs/standalone/`):
    - Pure API tests against external APIs (e.g., restful-booker)
    - Tests API endpoints independently without UI interaction
    - Focus on API functionality, authentication, CRUD operations, and error handling
 
-2. **Backend API Validation** (`src/api/backend/`):
+2. **Backend API Validation** (`tests/api/specs/backend/`):
    - API services used to validate backend state during UI testing
    - Part of UI + API hybrid testing (e.g., automationexercise.com)
    - Verifies that UI actions correctly update backend data

@@ -14,8 +14,8 @@ Define consistent practices for generating, randomizing, and cleaning up test da
 
 - **Factory Pattern**
   - Generate dynamic test data via factory/builder utilities.
-  - UI-specific factories live under `src/ui/utils/`.
-  - API-specific factories live under `src/api/utils/`.
+  - UI-specific factories live under `tests/common/utils/` (e.g., `userDataFactory.ts`, `paymentDataFactory.ts`).
+  - API-specific factories live under `tests/api/data/` and `tests/api/factories/`.
 
 - **Randomization**
   - Avoid data collisions by appending unique suffixes (timestamps, GUIDs) or using libraries like `@faker-js/faker`.
@@ -33,12 +33,13 @@ Define consistent practices for generating, randomizing, and cleaning up test da
 ## Implementation Guidelines
 
 - **Factory Files**
-  - UI example: `src/ui/utils/userDataFactory.ts`
-  - API example: `src/api/utils/userPayloadFactory.ts`
-  - For feature-specific needs, create dedicated builders (e.g., `user.factory.ts`) in the relevant domain directory.
+  - UI example: `tests/common/utils/userDataFactory.ts`
+  - API example: `tests/api/data/bookingDataFactory.ts`
+  - Service factory example: `tests/api/factories/userServiceFactory.ts`
+  - For feature-specific needs, create dedicated builders (e.g., `userPayloads.ts`) in the relevant domain directory.
 
 - **Type Definitions**
-  - Define TypeScript interfaces for all generated payloads (e.g., `UserPayload`) in `src/ui/data/`, `src/api/data/`, or shared data folders.
+  - Define TypeScript interfaces for all generated payloads (e.g., `UserData`, `Booking`) in `tests/common/data/` or `tests/api/data/`.
 
 - **Seeding / Deterministic Runs**
   - When reproducibility is required, allow seeding (e.g., `faker.seed(...)`) via config or environment variables.
