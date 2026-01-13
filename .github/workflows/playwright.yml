@@ -34,6 +34,7 @@ jobs:
         with:
           node-version: lts/*
           cache: 'npm'
+          cache-dependency-path: playwright-project/package-lock.json
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -77,23 +78,23 @@ jobs:
           echo "🧹 Sunday cleanup: Clearing Allure history..."
           rm -rf allure-results allure-report
 
-      # Step 7: Run ESLint
+      # Step 6: Run ESLint
       - name: Run ESLint
         working-directory: ./playwright-project
         run: npm run lint
 
-      # Step 8: Check code formatting
+      # Step 7: Check code formatting
       - name: Check code formatting
         working-directory: ./playwright-project
         run: npm run format
 
-      # Step 9: Run tests
+      # Step 8: Run tests
       - name: Run Playwright tests
         working-directory: ./playwright-project
         run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         continue-on-error: true
 
-      # Step 8: Create executor.json for history tracking
+      # Step 9: Create executor.json for history tracking
       - name: Create executor.json
         if: ${{ !cancelled() }}
         working-directory: ./playwright-project
@@ -113,7 +114,7 @@ jobs:
           EOF
           echo "✅ Executor file created with buildOrder: ${{ github.run_number }}"
 
-      # Step 9: Verify history data
+      # Step 10: Verify history data
       - name: Verify Allure history
         if: ${{ !cancelled() && github.event_name != 'schedule' }}
         working-directory: ./playwright-project
@@ -125,13 +126,13 @@ jobs:
             echo "ℹ️  No previous history - this will be the baseline run"
           fi
 
-      # Step 10: Generate Allure report
+      # Step 11: Generate Allure report
       - name: Generate Allure report
         if: ${{ !cancelled() }}
         working-directory: ./playwright-project
         run: npx allure generate allure-results -o allure-report --clean
 
-      # Step 11: Verify generated report
+      # Step 12: Verify generated report
       - name: Verify generated report
         if: ${{ !cancelled() }}
         working-directory: ./playwright-project
@@ -139,7 +140,7 @@ jobs:
           echo "📊 Allure report generated successfully"
           ls -la allure-report/
 
-      # Step 12: Prepare GitHub Pages deployment
+      # Step 13: Prepare GitHub Pages deployment
       - name: Prepare GitHub Pages content
         if: ${{ !cancelled() }}
         working-directory: ./playwright-project
