@@ -1,0 +1,43 @@
+# Node modules
+node_modules
+
+# Build outputs
+dist
+build
+coverage
+
+# Cypress artifacts
+cypress/videos
+cypress/screenshots
+cypress/downloads
+
+# Minified files
+*.min.js
+
+# Dependencies
+package-lock.json
+
+# Environment
+.env
+
+# Allure
+allure-results
+allure-report
+
+# Cypress artifacts
+cypress/videos
+cypress/screenshots
+cypress/downloads
+
+# Minified files
+*.min.js
+
+# Dependencies
+package-lock.json
+
+# Environment
+.env
+
+# Allure
+allure-results
+allure-report

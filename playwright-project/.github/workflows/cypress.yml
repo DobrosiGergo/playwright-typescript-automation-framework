@@ -1,0 +1,66 @@
+name: Cypress E2E Tests
+
+on:
+  push:
+    branches: [main, master, gergo_test_branch]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+  pages: write
+  id-token: write
+
+jobs:
+  cypress-run:
+    name: Cypress E2E Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install Cypress dependencies
+        working-directory: ./cypress-e2e
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./cypress-e2e
+        run: npm run lint
+
+      - name: Check code formatting
+        working-directory: ./cypress-e2e
+        run: npm run format
+
+      - name: Run API Tests
+        working-directory: ./cypress-e2e
+        run: npx cypress run --spec 'cypress/e2e/api/**/*.cy.ts' --config video=false
+        continue-on-error: true
+
+      - name: Run UI Tests
+        working-directory: ./cypress-e2e
+        run: npx cypress run --spec 'cypress/e2e/ui/**/*.cy.ts' --config video=false
+        continue-on-error: true
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-results
+          path: |
+            cypress-e2e/cypress/results
+            cypress-e2e/test-results.json
+          retention-days: 30

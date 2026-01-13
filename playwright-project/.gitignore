@@ -1,33 +1,3 @@
-# ===================================
-# MONOREPO STRUCTURE
-# ===================================
-# Project-specific artifacts
-playwright-project/node_modules/
-playwright-project/allure-results/
-playwright-project/allure-report/
-playwright-project/playwright-report/
-playwright-project/test-results/
-playwright-project/.env
-
-cypress-project/node_modules/
-cypress-project/cypress/videos/
-cypress-project/cypress/screenshots/
-cypress-project/cypress/downloads/
-cypress-project/allure-results/
-cypress-project/allure-report/
-cypress-project/.env
-
-# Legacy root-level artifacts (to be removed)
-/allure-results/
-/allure-report/
-/playwright-report/
-/test-results/
-/node_modules/
-/cypress-e2e/
-
-# ===================================
-# STANDARD NODE.JS IGNORES
-# ===================================
 # Logs
 logs
 *.log

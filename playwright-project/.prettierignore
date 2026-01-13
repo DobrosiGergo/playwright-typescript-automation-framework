@@ -6,6 +6,9 @@ playwright-report/
 test-results/
 test-results.json
 
+# Cypress (not used in this project)
+cypress-e2e/
+
 # Dependencies
 node_modules/
 

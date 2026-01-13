@@ -105,6 +105,7 @@ export default [
       'build/**',
       '.vscode/**',
       '.idea/**',
+      'cypress-e2e/**',
       '*.config.js',
       '*.config.mjs',
       '*.config.ts',

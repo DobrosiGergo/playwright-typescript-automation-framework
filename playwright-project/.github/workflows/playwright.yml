@@ -37,12 +37,10 @@ jobs:
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        working-directory: ./playwright-project
         run: npm ci
 
       # Step 4: Install Playwright browsers
       - name: Install Playwright Browsers
-        working-directory: ./playwright-project
         run: npx playwright install --with-deps
 
       # Step 5: Restore Allure history from gh-pages branch
@@ -56,9 +54,8 @@ jobs:
 
       - name: Restore branch-specific history
         if: ${{ github.event_name != 'schedule' }}
-        working-directory: ./playwright-project
         run: |
-          HISTORY_FOLDER="../gh-pages-checkout/${{ github.ref_name }}-allure-report/history"
+          HISTORY_FOLDER="gh-pages-checkout/${{ github.ref_name }}-allure-report/history"
           if [ -d "$HISTORY_FOLDER" ]; then
             echo "📋 Restoring Allure history for branch: ${{ github.ref_name }}"
             mkdir -p allure-results/history
@@ -67,36 +64,31 @@ jobs:
           else
             echo "ℹ️  No previous history found for this branch (first run)"
           fi
-          rm -rf ../gh-pages-checkout
+          rm -rf gh-pages-checkout
 
       # Step 6: Clear history on Sunday
       - name: Clear Allure history (Sunday cleanup)
         if: ${{ github.event_name == 'schedule' }}
-        working-directory: ./playwright-project
         run: |
           echo "🧹 Sunday cleanup: Clearing Allure history..."
           rm -rf allure-results allure-report
 
       # Step 7: Run ESLint
       - name: Run ESLint
-        working-directory: ./playwright-project
         run: npm run lint
 
       # Step 8: Check code formatting
       - name: Check code formatting
-        working-directory: ./playwright-project
         run: npm run format
 
       # Step 9: Run tests
       - name: Run Playwright tests
-        working-directory: ./playwright-project
         run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
         continue-on-error: true
 
       # Step 8: Create executor.json for history tracking
       - name: Create executor.json
         if: ${{ !cancelled() }}
-        working-directory: ./playwright-project
         run: |
           echo "📝 Creating executor.json for history tracking..."
           cat > allure-results/executor.json << EOF
@@ -126,13 +118,11 @@ jobs:
       # Step 10: Generate Allure report
       - name: Generate Allure report
         if: ${{ !cancelled() }}
-        working-directory: ./playwright-project
         run: npx allure generate allure-results -o allure-report --clean
 
       # Step 11: Verify generated report
       - name: Verify generated report
         if: ${{ !cancelled() }}
-        working-directory: ./playwright-project
         run: |
           echo "📊 Allure report generated successfully"
           ls -la allure-report/
@@ -140,7 +130,6 @@ jobs:
       # Step 12: Prepare GitHub Pages deployment
       - name: Prepare GitHub Pages content
         if: ${{ !cancelled() }}
-        working-directory: ./playwright-project
         run: |
           echo "📦 Preparing GitHub Pages deployment..."
           rm -rf gh-pages-deploy
@@ -211,7 +200,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: ${{ !cancelled() }}
         with:
-          files: playwright-project/test-results/junit.xml
+          files: test-results/junit.xml
           check_name: Playwright Test Results
 
       # Artifact 1: Playwright Report
@@ -220,7 +209,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: playwright-report-${{ github.ref_name }}-${{ matrix.shardIndex }}
-          path: playwright-project/playwright-report/
+          path: playwright-report/
           retention-days: 30
 
       # Artifact 2: Allure Results (not report, we'll merge later)
@@ -229,7 +218,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: allure-results-${{ github.ref_name }}-${{ matrix.shardIndex }}
-          path: playwright-project/allure-results/
+          path: allure-results/
           retention-days: 1
 
   merge-reports:
@@ -248,11 +237,9 @@ jobs:
         with:
           node-version: lts/*
           cache: 'npm'
-          cache-dependency-path: playwright-project/package-lock.json
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        working-directory: ./playwright-project
         run: npm ci
 
       # Step 4: Download all Allure results from shards
@@ -260,12 +247,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: allure-results-${{ github.ref_name }}-*
-          path: playwright-project/allure-results-shards
+          path: allure-results-shards
           merge-multiple: true
 
       # Step 5: Merge all shard results into one folder
       - name: Merge Allure results
-        working-directory: ./playwright-project
         run: |
           echo "📦 Merging Allure results from all shards..."
           mkdir -p allure-results
@@ -283,9 +269,8 @@ jobs:
 
       - name: Restore branch-specific history
         if: ${{ github.event_name != 'schedule' }}
-        working-directory: ./playwright-project
         run: |
-          HISTORY_FOLDER="../gh-pages-checkout/${{ github.ref_name }}-allure-report/history"
+          HISTORY_FOLDER="gh-pages-checkout/${{ github.ref_name }}-allure-report/history"
           if [ -d "$HISTORY_FOLDER" ]; then
             echo "📋 Restoring Allure history for branch: ${{ github.ref_name }}"
             mkdir -p allure-results/history
@@ -294,11 +279,10 @@ jobs:
           else
             echo "ℹ️  No previous history found for this branch (first run)"
           fi
-          rm -rf ../gh-pages-checkout
+          rm -rf gh-pages-checkout
 
       # Step 7: Create executor.json for history tracking
       - name: Create executor.json
-        working-directory: ./playwright-project
         run: |
           echo "📝 Creating executor.json for history tracking..."
           cat > allure-results/executor.json << EOF
@@ -316,19 +300,16 @@ jobs:
 
       # Step 8: Generate merged Allure report
       - name: Generate Allure report
-        working-directory: ./playwright-project
         run: npx allure generate allure-results -o allure-report --clean
 
       # Step 9: Verify generated report
       - name: Verify generated report
-        working-directory: ./playwright-project
         run: |
           echo "📊 Allure report generated successfully"
           ls -la allure-report/
 
       # Step 10: Prepare GitHub Pages deployment
       - name: Prepare GitHub Pages content
-        working-directory: ./playwright-project
         run: |
           echo "📦 Preparing GitHub Pages deployment..."
           rm -rf gh-pages-deploy
@@ -398,7 +379,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: gh-pages-deploy-${{ github.ref_name }}
-          path: playwright-project/gh-pages-deploy/
+          path: gh-pages-deploy/
           retention-days: 1
 
   deploy:
