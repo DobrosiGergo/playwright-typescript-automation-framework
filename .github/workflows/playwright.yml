@@ -99,6 +99,7 @@ jobs:
         working-directory: ./playwright-project
         run: |
           echo "📝 Creating executor.json for history tracking..."
+          mkdir -p allure-results
           cat > allure-results/executor.json << EOF
           {
             "name": "GitHub Actions",
@@ -115,6 +116,7 @@ jobs:
       # Step 9: Verify history data
       - name: Verify Allure history
         if: ${{ !cancelled() && github.event_name != 'schedule' }}
+        working-directory: ./playwright-project
         run: |
           if [ -d allure-results/history ]; then
             echo "✅ Allure history available for trend analysis"
