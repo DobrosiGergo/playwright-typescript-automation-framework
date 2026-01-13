@@ -100,7 +100,13 @@ describe("Booking API @api @standalone @critical", () => {
           const foundBooking = response.body.find(
             (b: { bookingid: number }) => b.bookingid === sharedBookingId,
           );
-        void expect(foundBooking).to.exist;
+          void expect(foundBooking).to.exist;
+        });
+    });
+
+    it("should update an existing booking", () => {
+      const uniqueBooking = BookingDataFactory.generateBooking();
+
       bookingService.createBooking(uniqueBooking).then((createResponse) => {
         const createdBookingId = createResponse.body.bookingid;
         const updatedBooking =

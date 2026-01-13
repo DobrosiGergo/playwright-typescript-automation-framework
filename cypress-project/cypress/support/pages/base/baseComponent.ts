@@ -23,9 +23,9 @@ export abstract class BaseComponent {
    * @return {Cypress.Chainable<boolean>} True if element is visible, false otherwise
    */
   protected isVisible(selector: string): Cypress.Chainable<boolean> {
-    return cy.get("body").then(($body) => {
+    return cy.get('body').then(($body) => {
       const element = $body.find(selector);
-      if (element.length > 0 && element.is(":visible")) {
+      if (element.length > 0 && element.is(':visible')) {
         return true;
       }
       return false;
@@ -38,9 +38,9 @@ export abstract class BaseComponent {
    * @return {Cypress.Chainable<boolean>} True if element is hidden or not present, false otherwise
    */
   protected isHidden(selector: string): Cypress.Chainable<boolean> {
-    return cy.get("body").then(($body) => {
+    return cy.get('body').then(($body) => {
       const element = $body.find(selector);
-      if (element.length === 0 || !element.is(":visible")) {
+      if (element.length === 0 || !element.is(':visible')) {
         return true;
       }
       return false;
@@ -53,10 +53,7 @@ export abstract class BaseComponent {
    * @param {number} [timeout=10000] - Maximum wait time in milliseconds
    * @return {Cypress.Chainable} Chainable element
    */
-  protected waitForElement(
-    selector: string,
-    timeout = 10000,
-  ): Cypress.Chainable {
+  protected waitForElement(selector: string, timeout = 10000): Cypress.Chainable {
     return cy.get(selector, { timeout });
   }
 
@@ -66,11 +63,8 @@ export abstract class BaseComponent {
    * @param {number} [timeout=10000] - Maximum wait time in milliseconds
    * @return {Cypress.Chainable} Chainable element
    */
-  protected waitForVisible(
-    selector: string,
-    timeout = 10000,
-  ): Cypress.Chainable {
-    return cy.get(selector, { timeout }).should("be.visible");
+  protected waitForVisible(selector: string, timeout = 10000): Cypress.Chainable {
+    return cy.get(selector, { timeout }).should('be.visible');
   }
 
   /**
@@ -79,11 +73,8 @@ export abstract class BaseComponent {
    * @param {number} [timeout=10000] - Maximum wait time in milliseconds
    * @return {Cypress.Chainable} Chainable element
    */
-  protected waitForHidden(
-    selector: string,
-    timeout = 10000,
-  ): Cypress.Chainable {
-    return cy.get(selector, { timeout }).should("not.be.visible");
+  protected waitForHidden(selector: string, timeout = 10000): Cypress.Chainable {
+    return cy.get(selector, { timeout }).should('not.be.visible');
   }
 
   /**
@@ -116,7 +107,7 @@ export abstract class BaseComponent {
    * @return {Cypress.Chainable<string>} Element text content
    */
   protected getText(selector: string): Cypress.Chainable<string> {
-    return cy.get(selector).invoke("text");
+    return cy.get(selector).invoke('text');
   }
 
   /**
@@ -125,11 +116,8 @@ export abstract class BaseComponent {
    * @param {string} text - Expected text
    * @return {Cypress.Chainable} Chainable element
    */
-  protected shouldContainText(
-    selector: string,
-    text: string,
-  ): Cypress.Chainable {
-    return cy.get(selector).should("contain", text);
+  protected shouldContainText(selector: string, text: string): Cypress.Chainable {
+    return cy.get(selector).should('contain', text);
   }
 
   /**
@@ -138,11 +126,8 @@ export abstract class BaseComponent {
    * @param {string} attribute - Attribute name
    * @return {Cypress.Chainable<string>} Attribute value
    */
-  protected getAttribute(
-    selector: string,
-    attribute: string,
-  ): Cypress.Chainable<string> {
-    return cy.get(selector).invoke("attr", attribute);
+  protected getAttribute(selector: string, attribute: string): Cypress.Chainable<string> {
+    return cy.get(selector).invoke('attr', attribute);
   }
 
   /**

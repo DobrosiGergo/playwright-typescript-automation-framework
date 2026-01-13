@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main, master]
   schedule:
-    - cron: '0 3 * * 0' # Every Sunday at 3 AM UTC - clear history
+    - cron: "0 3 * * 0" # Every Sunday at 3 AM UTC - clear history
 
 permissions:
   contents: write
@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: playwright-project/package-lock.json
 
       # Step 3: Install dependencies
@@ -250,7 +250,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: playwright-project/package-lock.json
 
       # Step 3: Install dependencies
@@ -429,9 +429,9 @@ jobs:
           publish_branch: gh-pages
           keep_files: true
           destination_dir: .
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: 'Deploy Allure report from ${{ github.ref_name }}'
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_message: "Deploy Allure report from ${{ github.ref_name }}"
 
       # Display Allure Report link
       - name: 📊 Allure Report Link

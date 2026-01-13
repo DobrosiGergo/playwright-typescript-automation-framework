@@ -1,49 +1,37 @@
 /// <reference types="cypress" />
 
-import { BasePage } from "../base/basePage";
-import { LoginFormComponent } from "../components/authentication/loginForm.component";
-import { SignupFormComponent } from "../components/authentication/signupForm.component";
-import { RegistrationFormComponent } from "../components/authentication/registrationForm.component";
+import { BasePage } from '../base/basePage';
+import { LoginFormComponent } from '../components/authentication/loginForm.component';
+import { SignupFormComponent } from '../components/authentication/signupForm.component';
+import { RegistrationFormComponent } from '../components/authentication/registrationForm.component';
 
 /**
  * AuthenticationPage - Handles login and signup functionality
  * CYPRESS PATTERN: No async/await, returns chainable or void
  */
 export class AuthenticationPage extends BasePage {
-  protected pageUrl = "/login";
+  protected pageUrl = '/login';
 
   readonly loginForm: LoginFormComponent;
   readonly signupForm: SignupFormComponent;
   readonly registrationForm: RegistrationFormComponent;
 
-  private readonly loggedInText = () => cy.contains("Logged in as");
+  private readonly loggedInText = () => cy.contains('Logged in as');
   private readonly passwordField = () => cy.get('input[name="password"]');
-  private readonly accountCreatedMessage = () =>
-    cy.contains("Account Created!");
-  private readonly duplicateEmailMessage = () =>
-    cy.contains("Email Address already exist!");
-  private readonly invalidLoginMessage = () =>
-    cy.contains("Your email or password is incorrect!");
-  private readonly signupNameField = () =>
-    cy.get('input[data-qa="signup-name"]');
-  private readonly signupEmailField = () =>
-    cy.get('input[data-qa="signup-email"]');
-  private readonly signupButton = () =>
-    cy.get('button[data-qa="signup-button"]');
-  private readonly logoutLink = () => cy.get("a").contains(" Logout");
+  private readonly accountCreatedMessage = () => cy.contains('Account Created!');
+  private readonly duplicateEmailMessage = () => cy.contains('Email Address already exist!');
+  private readonly invalidLoginMessage = () => cy.contains('Your email or password is incorrect!');
+  private readonly signupNameField = () => cy.get('input[data-qa="signup-name"]');
+  private readonly signupEmailField = () => cy.get('input[data-qa="signup-email"]');
+  private readonly signupButton = () => cy.get('button[data-qa="signup-button"]');
+  private readonly logoutLink = () => cy.get('a').contains(' Logout');
 
   constructor() {
     super();
 
-    this.loginForm = new LoginFormComponent(
-      'form:has(input[data-qa="login-email"])',
-    );
-    this.signupForm = new SignupFormComponent(
-      'form:has(input[data-qa="signup-name"])',
-    );
-    this.registrationForm = new RegistrationFormComponent(
-      'form:has(input[name="password"])',
-    );
+    this.loginForm = new LoginFormComponent('form:has(input[data-qa="login-email"])');
+    this.signupForm = new SignupFormComponent('form:has(input[data-qa="signup-name"])');
+    this.registrationForm = new RegistrationFormComponent('form:has(input[name="password"])');
   }
 
   /**
@@ -124,8 +112,8 @@ export class AuthenticationPage extends BasePage {
    */
   getLoggedInUsername(): Cypress.Chainable<string> {
     return this.loggedInText()
-      .invoke("text")
-      .then((text) => text.replace("Logged in as ", "").trim());
+      .invoke('text')
+      .then((text) => text.replace('Logged in as ', '').trim());
   }
 
   /**
@@ -134,9 +122,9 @@ export class AuthenticationPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyUserLoggedIn(username?: string): this {
-    this.loggedInText().should("be.visible");
+    this.loggedInText().should('be.visible');
     if (username) {
-      cy.contains(username).should("be.visible");
+      cy.contains(username).should('be.visible');
     }
     return this;
   }
@@ -156,7 +144,7 @@ export class AuthenticationPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyPasswordFieldVisible(): this {
-    this.passwordField().should("be.visible");
+    this.passwordField().should('be.visible');
     return this;
   }
 
@@ -165,7 +153,7 @@ export class AuthenticationPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyAccountCreated(): this {
-    this.accountCreatedMessage().should("be.visible");
+    this.accountCreatedMessage().should('be.visible');
     return this;
   }
 
@@ -174,7 +162,7 @@ export class AuthenticationPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyNotOnSignupPage(): this {
-    cy.url().should("not.contain", "/signup");
+    cy.url().should('not.contain', '/signup');
     return this;
   }
 
@@ -183,7 +171,7 @@ export class AuthenticationPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyDuplicateEmailError(): this {
-    this.duplicateEmailMessage().should("be.visible");
+    this.duplicateEmailMessage().should('be.visible');
     return this;
   }
 
@@ -192,7 +180,7 @@ export class AuthenticationPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyInvalidLoginError(): this {
-    this.invalidLoginMessage().should("be.visible");
+    this.invalidLoginMessage().should('be.visible');
     return this;
   }
 
@@ -201,7 +189,7 @@ export class AuthenticationPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyOnLoginPage(): this {
-    cy.url().should("contain", "/login");
+    cy.url().should('contain', '/login');
     return this;
   }
 
@@ -210,9 +198,8 @@ export class AuthenticationPage extends BasePage {
    * @param {('name'|'email')} fieldType - Type of field to validate
    * @return {this} Returns this for method chaining
    */
-  verifySignupFieldInvalid(fieldType: "name" | "email"): this {
-    const field =
-      fieldType === "name" ? this.signupNameField() : this.signupEmailField();
+  verifySignupFieldInvalid(fieldType: 'name' | 'email'): this {
+    const field = fieldType === 'name' ? this.signupNameField() : this.signupEmailField();
     field.then(($input) => {
       void expect(($input[0] as HTMLInputElement).validity.valid).to.be.false;
     });
@@ -225,7 +212,7 @@ export class AuthenticationPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifySignupNameFieldInvalid(): this {
-    return this.verifySignupFieldInvalid("name");
+    return this.verifySignupFieldInvalid('name');
   }
 
   /**
@@ -234,7 +221,7 @@ export class AuthenticationPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifySignupEmailFieldInvalid(): this {
-    return this.verifySignupFieldInvalid("email");
+    return this.verifySignupFieldInvalid('email');
   }
 
   /**
@@ -262,7 +249,7 @@ export class AuthenticationPage extends BasePage {
    */
   logout(): this {
     this.logoutLink().click();
-    cy.document().should("have.property", "readyState", "complete");
+    cy.document().should('have.property', 'readyState', 'complete');
     return this;
   }
 
