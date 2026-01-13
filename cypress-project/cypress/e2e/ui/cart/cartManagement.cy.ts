@@ -46,12 +46,8 @@ describe("Cart Management - Login + Cart Verification @critical @regression", ()
 
       softExpect(response.status).to.eq(StatusCodes.OK);
       softExpect(body).to.have.property(PRODUCT_API_PROPERTIES.PRODUCTS);
-      expect(body.products).to.not.be.undefined;
-      expect(body.products.length).to.be.gt(0);
-    });
-
-    authPage.navigateToAuthenticationPage();
-    authPage.login(testUser.email, testUser.password);
+    void expect(body.products).to.not.be.undefined;
+    void expect(body.products.length).to.be.gt(0);
     authPage.verifyUserLoggedIn();
 
     navbar.goToProducts();

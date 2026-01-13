@@ -20,13 +20,9 @@ export abstract class BaseComponent {
   /**
    * Check if element is visible
    * @param {string} selector - CSS selector to check
-   * @param {number} [_timeout=5000] - Maximum wait time in milliseconds
    * @return {Cypress.Chainable<boolean>} True if element is visible, false otherwise
    */
-  protected isVisible(
-    selector: string,
-    _timeout = 5000,
-  ): Cypress.Chainable<boolean> {
+  protected isVisible(selector: string): Cypress.Chainable<boolean> {
     return cy.get("body").then(($body) => {
       const element = $body.find(selector);
       if (element.length > 0 && element.is(":visible")) {
@@ -110,7 +106,8 @@ export abstract class BaseComponent {
     text: string,
     options?: Partial<Cypress.TypeOptions>,
   ): Cypress.Chainable {
-    return cy.get(selector).clear().type(text, options);
+    cy.get(selector).clear();
+    return cy.get(selector).type(text, options);
   }
 
   /**

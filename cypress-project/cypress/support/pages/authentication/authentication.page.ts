@@ -214,7 +214,7 @@ export class AuthenticationPage extends BasePage {
     const field =
       fieldType === "name" ? this.signupNameField() : this.signupEmailField();
     field.then(($input) => {
-      expect(($input[0] as HTMLInputElement).validity.valid).to.be.false;
+      void expect(($input[0] as HTMLInputElement).validity.valid).to.be.false;
     });
     return this;
   }

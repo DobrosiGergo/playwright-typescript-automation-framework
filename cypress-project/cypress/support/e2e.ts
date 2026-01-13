@@ -18,7 +18,7 @@ after(() => {
 });
 
 // Prevent uncaught exceptions from failing tests
-Cypress.on("uncaught:exception", (err, _runnable) => {
+Cypress.on("uncaught:exception", (err) => {
   // Log the error but don't fail the test
   console.error("Uncaught exception:", err.message);
   return false;

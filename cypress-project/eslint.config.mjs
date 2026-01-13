@@ -40,6 +40,13 @@ export default [
     },
   },
   {
+    files: ['cypress/support/commands.ts'],
+    rules: {
+      '@typescript-eslint/no-namespace': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
     files: ['cypress/e2e/**/*.cy.ts'],
     rules: {
       'cypress/no-assigning-return-values': 'error',
@@ -48,6 +55,7 @@ export default [
       'cypress/no-force': 'warn',
       'cypress/no-async-tests': 'error',
       'no-magic-numbers': 'off',
+      'max-lines-per-function': ['warn', { max: 200, skipBlankLines: true, skipComments: true }],
     },
   },
 ];
