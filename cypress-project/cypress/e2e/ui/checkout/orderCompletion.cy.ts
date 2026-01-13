@@ -1,22 +1,22 @@
 /// <reference types="cypress" />
 
-import { faker } from "@faker-js/faker";
-import { UserDataFactory } from "../../../support/data/userDataFactory";
-import { PaymentDataFactory } from "../../../support/data/paymentDataFactory";
-import { AuthenticationPage } from "../../../support/pages/authentication/authentication.page";
-import { ProductsPage } from "../../../support/pages/products/products.page";
-import { CartPage } from "../../../support/pages/cart/cart.page";
-import { CheckoutPage } from "../../../support/pages/checkout/checkout.page";
-import { NavbarComponent } from "../../../support/pages/components/common/navbar.component";
-import { UserService } from "../../../support/api/clients/user.service";
-import { StatusCodes } from "http-status-codes";
-import { ServiceFactory } from "../../../support/api/factories/serviceFactory";
+import { faker } from '@faker-js/faker';
+import { UserDataFactory } from '../../../support/data/userDataFactory';
+import { PaymentDataFactory } from '../../../support/data/paymentDataFactory';
+import { AuthenticationPage } from '../../../support/pages/authentication/authentication.page';
+import { ProductsPage } from '../../../support/pages/products/products.page';
+import { CartPage } from '../../../support/pages/cart/cart.page';
+import { CheckoutPage } from '../../../support/pages/checkout/checkout.page';
+import { NavbarComponent } from '../../../support/pages/components/common/navbar.component';
+import { UserService } from '../../../support/api/clients/user.service';
+import { StatusCodes } from 'http-status-codes';
+import { ServiceFactory } from '../../../support/api/factories/serviceFactory';
 
 /**
  * Order Completion Tests - UI + API Hybrid
  * Tests end-to-end purchase flow and order verification
  */
-describe("Order Completion - Purchase + Order History @critical @e2e", () => {
+describe('Order Completion - Purchase + Order History @critical @e2e', () => {
   const authPage = new AuthenticationPage();
   const productsPage = new ProductsPage();
   const cartPage = new CartPage();
@@ -32,7 +32,7 @@ describe("Order Completion - Purchase + Order History @critical @e2e", () => {
     authPage.navigateToAuthenticationPage();
   });
 
-  it("should complete purchase flow and verify order confirmation and user via API", () => {
+  it('should complete purchase flow and verify order confirmation and user via API', () => {
     const testUser = UserDataFactory.generateUserData();
 
     authPage.startSignup(testUser.name, testUser.email);
@@ -84,7 +84,7 @@ describe("Order Completion - Purchase + Order History @critical @e2e", () => {
     });
   });
 
-  it("should handle checkout with single product", () => {
+  it('should handle checkout with single product', () => {
     const testUser = UserDataFactory.generateUserData();
 
     authPage.startSignup(testUser.name, testUser.email);
@@ -116,7 +116,7 @@ describe("Order Completion - Purchase + Order History @critical @e2e", () => {
     checkoutPage.verifyOrderPlaced();
   });
 
-  it("should validate order details match cart contents", () => {
+  it('should validate order details match cart contents', () => {
     const testUser = UserDataFactory.generateUserData();
 
     authPage.startSignup(testUser.name, testUser.email);

@@ -1,21 +1,21 @@
 /// <reference types="cypress" />
 
-import { UserDataFactory } from "../../../support/data/userDataFactory";
-import { AuthenticationPage } from "../../../support/pages/authentication/authentication.page";
-import { ProductsPage } from "../../../support/pages/products/products.page";
-import { CartPage } from "../../../support/pages/cart/cart.page";
-import { NavbarComponent } from "../../../support/pages/components/common/navbar.component";
-import { UserService } from "../../../support/api/clients/user.service";
-import { ProductService } from "../../../support/api/clients/product.service";
-import { StatusCodes } from "http-status-codes";
-import { PRODUCT_API_PROPERTIES } from "../../../support/api/data/userConstants";
-import { ServiceFactory } from "../../../support/api/factories/serviceFactory";
+import { UserDataFactory } from '../../../support/data/userDataFactory';
+import { AuthenticationPage } from '../../../support/pages/authentication/authentication.page';
+import { ProductsPage } from '../../../support/pages/products/products.page';
+import { CartPage } from '../../../support/pages/cart/cart.page';
+import { NavbarComponent } from '../../../support/pages/components/common/navbar.component';
+import { UserService } from '../../../support/api/clients/user.service';
+import { ProductService } from '../../../support/api/clients/product.service';
+import { StatusCodes } from 'http-status-codes';
+import { PRODUCT_API_PROPERTIES } from '../../../support/api/data/userConstants';
+import { ServiceFactory } from '../../../support/api/factories/serviceFactory';
 
 /**
  * Cart Management Tests - UI + API Hybrid
  * Tests cart functionality with user authentication and product management
  */
-describe("Cart Management - Login + Cart Verification @critical @regression", () => {
+describe('Cart Management - Login + Cart Verification @critical @regression', () => {
   const authPage = new AuthenticationPage();
   const productsPage = new ProductsPage();
   const cartPage = new CartPage();
@@ -28,7 +28,7 @@ describe("Cart Management - Login + Cart Verification @critical @regression", ()
     productService = new ProductService();
   });
 
-  it("should create user via API, login via UI, and manage cart @hybrid @api-to-ui", () => {
+  it('should create user via API, login via UI, and manage cart @hybrid @api-to-ui', () => {
     const testUser = UserDataFactory.generateUserData();
 
     ServiceFactory.user
@@ -79,7 +79,7 @@ describe("Cart Management - Login + Cart Verification @critical @regression", ()
     });
   });
 
-  it("should login via UI, add products to cart, and verify user state via API", () => {
+  it('should login via UI, add products to cart, and verify user state via API', () => {
     const testUser = UserDataFactory.generateUserData();
 
     authPage.navigateToAuthenticationPage();
@@ -129,7 +129,7 @@ describe("Cart Management - Login + Cart Verification @critical @regression", ()
     authPage.verifyUserLoggedIn();
   });
 
-  it("should handle basic cart operations without login", () => {
+  it('should handle basic cart operations without login', () => {
     authPage.navigateToHome();
     navbar.verifyHomeVisible();
 

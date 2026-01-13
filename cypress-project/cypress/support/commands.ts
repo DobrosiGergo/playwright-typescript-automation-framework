@@ -3,10 +3,10 @@
 
 /// <reference types="cypress" />
 
-import type { UserData } from "./data/types";
-import { ServiceFactory } from "./api/factories/serviceFactory";
-import { AuthenticationPage } from "./pages/authentication/authentication.page";
-import { ProductsPage } from "./pages/products/products.page";
+import type { UserData } from './data/types';
+import { ServiceFactory } from './api/factories/serviceFactory';
+import { AuthenticationPage } from './pages/authentication/authentication.page';
+import { ProductsPage } from './pages/products/products.page';
 
 declare global {
   namespace Cypress {
@@ -43,10 +43,7 @@ declare global {
        * @return {Chainable<Response<any>>} Chainable Response object
        * @example cy.deleteUserViaAPI('user@example.com', 'password123')
        */
-      deleteUserViaAPI(
-        email: string,
-        password: string,
-      ): Chainable<Response<any>>;
+      deleteUserViaAPI(email: string, password: string): Chainable<Response<any>>;
 
       /**
        * Add product to cart via UI
@@ -56,10 +53,7 @@ declare global {
        * @example cy.addProductToCart('Blue Top')
        * @example cy.addProductToCart('Blue Top', 'viewCart')
        */
-      addProductToCart(
-        productName: string,
-        action?: "continue" | "viewCart",
-      ): Chainable<void>;
+      addProductToCart(productName: string, action?: 'continue' | 'viewCart'): Chainable<void>;
 
       /**
        * Navigate to a specific page
@@ -67,9 +61,7 @@ declare global {
        * @return {Chainable<void>} Chainable void for command chaining
        * @example cy.navigateToPage('products')
        */
-      navigateToPage(
-        page: "home" | "products" | "cart" | "login" | "signup",
-      ): Chainable<void>;
+      navigateToPage(page: 'home' | 'products' | 'cart' | 'login' | 'signup'): Chainable<void>;
     }
   }
 
@@ -93,7 +85,7 @@ declare global {
  * @param {string} email - User's email address
  * @param {string} password - User's password
  */
-Cypress.Commands.add("loginViaUI", (email: string, password: string) => {
+Cypress.Commands.add('loginViaUI', (email: string, password: string) => {
   cy.log(`Logging in as: ${email}`);
   const authPage = new AuthenticationPage();
   authPage.navigate();
@@ -105,7 +97,7 @@ Cypress.Commands.add("loginViaUI", (email: string, password: string) => {
  * Register user via UI using Authentication Page Object
  * @param {UserData} userData - Complete user registration data
  */
-Cypress.Commands.add("registerUserViaUI", (userData: UserData) => {
+Cypress.Commands.add('registerUserViaUI', (userData: UserData) => {
   cy.log(`Registering user: ${userData.email}`);
   const authPage = new AuthenticationPage();
   authPage.registerUser(userData, false);
@@ -115,7 +107,7 @@ Cypress.Commands.add("registerUserViaUI", (userData: UserData) => {
  * Create user via API using ServiceFactory
  * @param {UserData} userData - Complete user registration data
  */
-Cypress.Commands.add("createUserViaAPI", (userData: UserData) => {
+Cypress.Commands.add('createUserViaAPI', (userData: UserData) => {
   cy.log(`Creating user via API: ${userData.email}`);
   cy.wrap(null).then(async () => {
     return await ServiceFactory.user.createUser(userData);
@@ -127,7 +119,7 @@ Cypress.Commands.add("createUserViaAPI", (userData: UserData) => {
  * @param {string} email - User's email address
  * @param {string} password - User's password
  */
-Cypress.Commands.add("deleteUserViaAPI", (email: string, password: string) => {
+Cypress.Commands.add('deleteUserViaAPI', (email: string, password: string) => {
   cy.log(`Deleting user via API: ${email}`);
   cy.wrap(null).then(async () => {
     return await ServiceFactory.user.deleteUser(email, password);
@@ -140,8 +132,8 @@ Cypress.Commands.add("deleteUserViaAPI", (email: string, password: string) => {
  * @param {('continue'|'viewCart')} [action='continue'] - Action after adding (continue shopping or view cart)
  */
 Cypress.Commands.add(
-  "addProductToCart",
-  (productName: string, action: "continue" | "viewCart" = "continue") => {
+  'addProductToCart',
+  (productName: string, action: 'continue' | 'viewCart' = 'continue') => {
     cy.log(`Adding "${productName}" to cart`);
     const productsPage = new ProductsPage();
     productsPage.addProductToCart(productName, action);
@@ -153,14 +145,14 @@ Cypress.Commands.add(
  * @param {('home'|'products'|'cart'|'login'|'signup')} page - Page to navigate to
  */
 Cypress.Commands.add(
-  "navigateToPage",
-  (page: "home" | "products" | "cart" | "login" | "signup") => {
+  'navigateToPage',
+  (page: 'home' | 'products' | 'cart' | 'login' | 'signup') => {
     const pageUrls: Record<string, string> = {
-      home: "/",
-      products: "/products",
-      cart: "/view_cart",
-      login: "/login",
-      signup: "/signup",
+      home: '/',
+      products: '/products',
+      cart: '/view_cart',
+      login: '/login',
+      signup: '/signup',
     };
 
     cy.log(`Navigating to: ${page}`);
@@ -227,7 +219,7 @@ const softAssertionFailures: string[] = [];
 // Report soft assertion failures after each test
 afterEach(() => {
   if (softAssertionFailures.length > 0) {
-    const failures = softAssertionFailures.join("\n");
+    const failures = softAssertionFailures.join('\n');
     softAssertionFailures.length = 0; // Clear array
     throw new Error(`Soft assertion failures:\n${failures}`);
   }

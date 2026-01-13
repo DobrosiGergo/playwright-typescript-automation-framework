@@ -1,5 +1,5 @@
 ﻿---
-applyTo: "**"
+applyTo: '**'
 ---
 
 # Cypress Assertion & Validation Guide

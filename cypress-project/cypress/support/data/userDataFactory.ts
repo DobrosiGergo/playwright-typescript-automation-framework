@@ -1,5 +1,5 @@
-import { faker } from "@faker-js/faker";
-import { UserData } from "./types";
+import { faker } from '@faker-js/faker';
+import { UserData } from './types';
 
 /**
  * User Data Factory - Generates unique test user data
@@ -23,7 +23,7 @@ export class UserDataFactory {
   static generateUserData(): UserData {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
-    const birthDate = faker.date.birthdate({ min: 18, max: 65, mode: "age" });
+    const birthDate = faker.date.birthdate({ min: 18, max: 65, mode: 'age' });
 
     return {
       name: `${firstName} ${lastName}`,
@@ -33,16 +33,16 @@ export class UserDataFactory {
         memorable: false,
         pattern: /[A-Za-z0-9!@#$]/,
       }),
-      title: faker.helpers.arrayElement(["Mr", "Mrs"]),
+      title: faker.helpers.arrayElement(['Mr', 'Mrs']),
       birth_date: birthDate.getDate().toString(),
-      birth_month: birthDate.toLocaleString("en-US", { month: "long" }),
+      birth_month: birthDate.toLocaleString('en-US', { month: 'long' }),
       birth_year: birthDate.getFullYear().toString(),
       firstname: firstName,
       lastname: lastName,
       company: faker.company.name(),
       address1: faker.location.streetAddress(),
       address2: faker.location.secondaryAddress(),
-      country: "India",
+      country: 'India',
       zipcode: faker.location.zipCode(),
       state: faker.location.state(),
       city: faker.location.city(),
@@ -58,7 +58,7 @@ export class UserDataFactory {
     return {
       email: faker.lorem.word(),
       password: faker.string.alphanumeric(3),
-      name: "",
+      name: '',
       mobile_number: faker.lorem.word(),
     };
   }
@@ -71,19 +71,19 @@ export class UserDataFactory {
     const invalidBirthDate = faker.date.birthdate({
       min: 1,
       max: 10,
-      mode: "age",
+      mode: 'age',
     });
 
     return {
-      name: "",
+      name: '',
       email: faker.lorem.word(),
       password: faker.string.alphanumeric(3),
-      title: faker.helpers.arrayElement(["Mr", "Mrs"]),
+      title: faker.helpers.arrayElement(['Mr', 'Mrs']),
       birth_date: invalidBirthDate.getDate().toString(),
-      birth_month: invalidBirthDate.toLocaleString("en-US", { month: "long" }),
+      birth_month: invalidBirthDate.toLocaleString('en-US', { month: 'long' }),
       birth_year: invalidBirthDate.getFullYear().toString(),
-      firstname: "",
-      lastname: "",
+      firstname: '',
+      lastname: '',
       company: faker.lorem.word(),
       address1: faker.lorem.word(),
       country: faker.location.countryCode(),

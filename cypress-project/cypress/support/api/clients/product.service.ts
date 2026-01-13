@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { BaseApiClient } from "./baseApiClient";
+import { BaseApiClient } from './baseApiClient';
 
 /**
  * ProductService - Handles product-related API operations
@@ -9,22 +9,16 @@ import { BaseApiClient } from "./baseApiClient";
  */
 export class ProductService extends BaseApiClient {
   constructor() {
-    super(
-      Cypress.env("BACKEND_API_BASE_URL") ||
-        "https://automationexercise.com/api",
-    );
+    super(Cypress.env('BACKEND_API_BASE_URL') || 'https://automationexercise.com/api');
   }
 
   /**
    * Get all products list
    */
   getAllProducts(): Cypress.Chainable<Cypress.Response<any>> {
-    cy.log("API: Fetching all products");
-    return this.get("/productsList").then((response) => {
-      if (
-        typeof response.body === "string" &&
-        response.body.trim().startsWith("{")
-      ) {
+    cy.log('API: Fetching all products');
+    return this.get('/productsList').then((response) => {
+      if (typeof response.body === 'string' && response.body.trim().startsWith('{')) {
         response.body = JSON.parse(response.body);
       }
       return response;
@@ -38,7 +32,7 @@ export class ProductService extends BaseApiClient {
    */
   searchProduct(searchTerm: string): Cypress.Chainable<Cypress.Response<any>> {
     cy.log(`API: Searching products for "${searchTerm}"`);
-    return this.post("/searchProduct", {
+    return this.post('/searchProduct', {
       body: { search_product: searchTerm },
       form: true,
     });
@@ -48,7 +42,7 @@ export class ProductService extends BaseApiClient {
    * Get all brands list
    */
   getAllBrands(): Cypress.Chainable<Cypress.Response<any>> {
-    cy.log("API: Fetching all brands");
-    return this.get("/brandsList");
+    cy.log('API: Fetching all brands');
+    return this.get('/brandsList');
   }
 }

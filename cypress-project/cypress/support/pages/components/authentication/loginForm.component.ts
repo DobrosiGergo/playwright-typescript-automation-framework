@@ -1,20 +1,16 @@
 /// <reference types="cypress" />
 
-import { BaseComponent } from "../../base/baseComponent";
+import { BaseComponent } from '../../base/baseComponent';
 
 /**
  * LoginFormComponent - Handles login form functionality
  * CYPRESS PATTERN: No async/await, returns this for chaining
  */
 export class LoginFormComponent extends BaseComponent {
-  readonly loginEmailInput = () =>
-    this.container.find('input[data-qa="login-email"]');
-  readonly loginPasswordInput = () =>
-    this.container.find('input[data-qa="login-password"]');
-  readonly loginButton = () =>
-    this.container.find('button[data-qa="login-button"]');
-  readonly loginErrorMessage = () =>
-    cy.contains("Your email or password is incorrect!");
+  readonly loginEmailInput = () => this.container.find('input[data-qa="login-email"]');
+  readonly loginPasswordInput = () => this.container.find('input[data-qa="login-password"]');
+  readonly loginButton = () => this.container.find('button[data-qa="login-button"]');
+  readonly loginErrorMessage = () => cy.contains('Your email or password is incorrect!');
 
   constructor(containerSelector: string) {
     super(containerSelector);
@@ -40,9 +36,7 @@ export class LoginFormComponent extends BaseComponent {
    */
   isLoginErrorVisible(): Cypress.Chainable<boolean> {
     return this.loginErrorMessage()
-      .should("exist")
-      .then(($el: JQuery<HTMLElement> | undefined) =>
-        $el ? $el.is(":visible") : false,
-      );
+      .should('exist')
+      .then(($el: JQuery<HTMLElement> | undefined) => ($el ? $el.is(':visible') : false));
   }
 }

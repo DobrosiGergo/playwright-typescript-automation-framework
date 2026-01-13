@@ -28,7 +28,7 @@ export abstract class BasePage {
    * Navigate to home page
    */
   navigateToHome(): this {
-    this.navigateTo("/");
+    this.navigateTo('/');
     return this;
   }
 
@@ -51,7 +51,7 @@ export abstract class BasePage {
    */
   protected waitForPageReady(): this {
     // Wait for DOM to be loaded
-    cy.document().should("have.property", "readyState", "complete");
+    cy.document().should('have.property', 'readyState', 'complete');
     return this;
   }
 
@@ -78,7 +78,7 @@ export abstract class BasePage {
    * @return {this} Returns this for method chaining
    */
   waitForUrl(urlPart: string): this {
-    cy.url().should("include", urlPart);
+    cy.url().should('include', urlPart);
     return this;
   }
 
@@ -88,7 +88,7 @@ export abstract class BasePage {
    * @return {Cypress.Chainable<boolean>} True if element exists, false otherwise
    */
   protected elementExists(selector: string): Cypress.Chainable<boolean> {
-    return cy.get("body").then(($body) => {
+    return cy.get('body').then(($body) => {
       return $body.find(selector).length > 0;
     });
   }
@@ -99,11 +99,8 @@ export abstract class BasePage {
    * @param {number} [timeout=10000] - Maximum wait time in milliseconds
    * @return {Cypress.Chainable} Chainable element
    */
-  protected waitForElement(
-    selector: string,
-    timeout = 10000,
-  ): Cypress.Chainable {
-    return cy.get(selector, { timeout }).should("be.visible");
+  protected waitForElement(selector: string, timeout = 10000): Cypress.Chainable {
+    return cy.get(selector, { timeout }).should('be.visible');
   }
 
   /**

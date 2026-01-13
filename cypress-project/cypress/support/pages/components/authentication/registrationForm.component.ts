@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-import { BaseComponent } from "../../base/baseComponent";
-import { AccountInfoComponent } from "./accountInfo.component";
-import { PersonalInfoComponent } from "./personalInfo.component";
-import { AddressInfoComponent } from "./addressInfo.component";
+import { BaseComponent } from '../../base/baseComponent';
+import { AccountInfoComponent } from './accountInfo.component';
+import { PersonalInfoComponent } from './personalInfo.component';
+import { AddressInfoComponent } from './addressInfo.component';
 
 /**
  * RegistrationFormComponent - Orchestrates registration form functionality
@@ -14,10 +14,9 @@ export class RegistrationFormComponent extends BaseComponent {
   readonly accountInfoComponent: AccountInfoComponent;
   readonly personalInfoComponent: PersonalInfoComponent;
   readonly addressInfoComponent: AddressInfoComponent;
-  readonly createAccountButton = () =>
-    this.container.find('button[data-qa="create-account"]');
-  readonly accountCreatedMessage = () => cy.contains("Account Created!");
-  readonly continueButton = () => cy.contains("a", "Continue");
+  readonly createAccountButton = () => this.container.find('button[data-qa="create-account"]');
+  readonly accountCreatedMessage = () => cy.contains('Account Created!');
+  readonly continueButton = () => cy.contains('a', 'Continue');
 
   constructor(containerSelector: string) {
     super(containerSelector);
@@ -64,7 +63,7 @@ export class RegistrationFormComponent extends BaseComponent {
     zipcode: string;
     mobile_number: string;
   }): this {
-    cy.log("Completing registration form");
+    cy.log('Completing registration form');
 
     this.accountInfoComponent.fillAccountInfo({
       title: userData.title,
@@ -90,7 +89,7 @@ export class RegistrationFormComponent extends BaseComponent {
       zipcode: userData.zipcode,
     });
 
-    cy.log("Submitting registration form");
+    cy.log('Submitting registration form');
     this.createAccountButton().click();
 
     return this;
@@ -102,10 +101,8 @@ export class RegistrationFormComponent extends BaseComponent {
    */
   isAccountCreatedVisible(): Cypress.Chainable<boolean> {
     return this.accountCreatedMessage()
-      .should("exist")
-      .then(($el: JQuery<HTMLElement> | undefined) =>
-        $el ? $el.is(":visible") : false,
-      );
+      .should('exist')
+      .then(($el: JQuery<HTMLElement> | undefined) => ($el ? $el.is(':visible') : false));
   }
 
   /**

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { BaseComponent } from "../../base/baseComponent";
+import { BaseComponent } from '../../base/baseComponent';
 
 /**
  * SearchComponent - Handles product search functionality
@@ -8,10 +8,10 @@ import { BaseComponent } from "../../base/baseComponent";
  */
 export class SearchComponent extends BaseComponent {
   readonly searchInput = () => cy.get('input[name="search"]');
-  readonly searchButton = () => cy.get("button#submit_search");
+  readonly searchButton = () => cy.get('button#submit_search');
 
   constructor() {
-    super("#search_product"); // Search container
+    super('#search_product'); // Search container
   }
 
   /**
@@ -21,9 +21,7 @@ export class SearchComponent extends BaseComponent {
    */
   search(searchTerm: string): this {
     cy.log(`Searching for products: "${searchTerm}"`);
-    this.searchInput()
-      .clear()
-      .type(searchTerm, { parseSpecialCharSequences: false });
+    this.searchInput().clear().type(searchTerm, { parseSpecialCharSequences: false });
     this.searchButton().click();
     return this;
   }
@@ -33,7 +31,7 @@ export class SearchComponent extends BaseComponent {
    * @return {this} Returns this for method chaining
    */
   clearSearch(): this {
-    cy.log("Clearing search input");
+    cy.log('Clearing search input');
     this.searchInput().clear();
     return this;
   }
@@ -44,8 +42,8 @@ export class SearchComponent extends BaseComponent {
    */
   getSearchValue(): Cypress.Chainable<string> {
     return this.searchInput()
-      .invoke("val")
-      .then((val) => String(val || ""));
+      .invoke('val')
+      .then((val) => String(val || ''));
   }
 
   /**
@@ -53,8 +51,8 @@ export class SearchComponent extends BaseComponent {
    * @return {this} Returns this for method chaining
    */
   verifySearchVisible(): this {
-    this.searchInput().should("be.visible");
-    this.searchButton().should("be.visible");
+    this.searchInput().should('be.visible');
+    this.searchButton().should('be.visible');
     return this;
   }
 }

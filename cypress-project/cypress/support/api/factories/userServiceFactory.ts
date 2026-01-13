@@ -1,13 +1,13 @@
-﻿import type { UserData } from "../../data/types";
+﻿import type { UserData } from '../../data/types';
 import {
   buildCreateUserPayload,
   buildLoginPayload,
   buildDeleteUserPayload,
-} from "../data/userPayloads";
+} from '../data/userPayloads';
 
 // Load environment variable from Cypress config
 const BACKEND_API_BASE_URL =
-  Cypress.env("BACKEND_API_BASE_URL") ?? "https://automationexercise.com/api";
+  Cypress.env('BACKEND_API_BASE_URL') ?? 'https://automationexercise.com/api';
 
 /**
  * User Service Factory - Standalone user API operations
@@ -30,7 +30,7 @@ export const UserServiceFactory = {
     });
 
     return fetch(`${String(BACKEND_API_BASE_URL)}/createAccount`, {
-      method: "POST",
+      method: 'POST',
       body: formData,
     });
   },
@@ -61,7 +61,7 @@ export const UserServiceFactory = {
     });
 
     return fetch(`${String(BACKEND_API_BASE_URL)}/verifyLogin`, {
-      method: "POST",
+      method: 'POST',
       body: formData,
     });
   },
@@ -81,7 +81,7 @@ export const UserServiceFactory = {
     });
 
     return fetch(`${String(BACKEND_API_BASE_URL)}/deleteAccount`, {
-      method: "DELETE",
+      method: 'DELETE',
       body: formData,
     });
   },
@@ -91,9 +91,7 @@ export const UserServiceFactory = {
    * @param email - The email address of the user to retrieve
    * @returns Promise<{status: number, body: any | null}> - Object with HTTP status and response body (null if error)
    */
-  async safeGetUserByEmail(
-    email: string,
-  ): Promise<{ status: number; body: any | null }> {
+  async safeGetUserByEmail(email: string): Promise<{ status: number; body: any | null }> {
     try {
       const response = await this.getUserByEmail(email);
       return {

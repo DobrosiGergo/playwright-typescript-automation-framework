@@ -1,24 +1,24 @@
 /// <reference types="cypress" />
 
-import { BasePage } from "../base/basePage";
-import type { PaymentData } from "../../utils/types";
+import { BasePage } from '../base/basePage';
+import type { PaymentData } from '../../utils/types';
 
 /**
  * CheckoutPage - Handles checkout and payment flow
  * CYPRESS PATTERN: No async/await, returns this for chaining
  */
 export class CheckoutPage extends BasePage {
-  protected pageUrl = "/checkout";
+  protected pageUrl = '/checkout';
 
   // Private locators
-  private readonly continueButton = () => cy.contains("a", "Continue");
+  private readonly continueButton = () => cy.contains('a', 'Continue');
   private readonly checkoutUrl = () => cy.url();
   private readonly paymentDoneUrl = () => cy.url({ timeout: 15000 });
-  private readonly orderPlacedText = () => cy.contains("Order Placed!");
+  private readonly orderPlacedText = () => cy.contains('Order Placed!');
 
   // Selectors
   readonly orderCommentTextarea = () => cy.get('textarea[name="message"]');
-  readonly placeOrderButton = () => cy.contains("a", "Place Order");
+  readonly placeOrderButton = () => cy.contains('a', 'Place Order');
 
   // Payment form selectors
   readonly cardNameInput = () => cy.get('input[name="name_on_card"]');
@@ -30,7 +30,7 @@ export class CheckoutPage extends BasePage {
 
   // Success/Error messages
   readonly successMessage = () => cy.get('div[class*="alert-success"]');
-  readonly orderPlacedMessage = () => cy.contains("Order Placed!");
+  readonly orderPlacedMessage = () => cy.contains('Order Placed!');
 
   /**
    * Add order comment
@@ -107,7 +107,7 @@ export class CheckoutPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   completeCheckout(paymentData: PaymentData, comment?: string): this {
-    cy.log("Completing entire checkout flow");
+    cy.log('Completing entire checkout flow');
 
     if (comment) {
       this.addOrderComment(comment);
@@ -123,25 +123,20 @@ export class CheckoutPage extends BasePage {
    * @param {('success'|'placed'|'paymentUrl'|'checkoutUrl')} [type='success'] - Type of verification to perform
    * @return {this} Returns this for method chaining
    */
-  verifyOrderStatus(
-    type: "success" | "placed" | "paymentUrl" | "checkoutUrl" = "success",
-  ): this {
+  verifyOrderStatus(type: 'success' | 'placed' | 'paymentUrl' | 'checkoutUrl' = 'success'): this {
     switch (type) {
-      case "success":
-        this.orderPlacedMessage().should("be.visible");
-        this.successMessage().should(
-          "contain",
-          "Congratulations! Your order has been confirmed!",
-        );
+      case 'success':
+        this.orderPlacedMessage().should('be.visible');
+        this.successMessage().should('contain', 'Congratulations! Your order has been confirmed!');
         break;
-      case "placed":
-        this.orderPlacedText().should("be.visible");
+      case 'placed':
+        this.orderPlacedText().should('be.visible');
         break;
-      case "paymentUrl":
-        this.paymentDoneUrl().should("include", "/payment_done");
+      case 'paymentUrl':
+        this.paymentDoneUrl().should('include', '/payment_done');
         break;
-      case "checkoutUrl":
-        this.checkoutUrl().should("include", "/checkout");
+      case 'checkoutUrl':
+        this.checkoutUrl().should('include', '/checkout');
         break;
     }
     return this;
@@ -152,7 +147,7 @@ export class CheckoutPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyOrderSuccess(): this {
-    return this.verifyOrderStatus("success");
+    return this.verifyOrderStatus('success');
   }
 
   /**
@@ -160,7 +155,7 @@ export class CheckoutPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyPayButtonVisible(): this {
-    this.payAndConfirmButton().should("be.visible");
+    this.payAndConfirmButton().should('be.visible');
     return this;
   }
 
@@ -169,7 +164,7 @@ export class CheckoutPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyPaymentSuccess(): this {
-    return this.verifyOrderStatus("paymentUrl");
+    return this.verifyOrderStatus('paymentUrl');
   }
 
   /**
@@ -177,7 +172,7 @@ export class CheckoutPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyOrderPlaced(): this {
-    return this.verifyOrderStatus("placed");
+    return this.verifyOrderStatus('placed');
   }
 
   /**
@@ -185,7 +180,7 @@ export class CheckoutPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyOnCheckoutPage(): this {
-    return this.verifyOrderStatus("checkoutUrl");
+    return this.verifyOrderStatus('checkoutUrl');
   }
 
   /**
@@ -202,6 +197,6 @@ export class CheckoutPage extends BasePage {
    * @return {Cypress.Chainable<string>} Order placed message text
    */
   getOrderPlacedMessage(): Cypress.Chainable<string> {
-    return this.orderPlacedMessage().invoke("text");
+    return this.orderPlacedMessage().invoke('text');
   }
 }

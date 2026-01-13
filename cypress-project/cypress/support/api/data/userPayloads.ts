@@ -1,4 +1,4 @@
-﻿import type { UserData } from "../../data/types";
+﻿import type { UserData } from '../../data/types';
 
 /**
  * User API Payloads - Data structure builders for user operations

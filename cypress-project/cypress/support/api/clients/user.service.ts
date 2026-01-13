@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { BaseApiClient } from "./baseApiClient";
+import { BaseApiClient } from './baseApiClient';
 
 /**
  * UserService - Handles user-related API operations for backend validation
@@ -9,10 +9,7 @@ import { BaseApiClient } from "./baseApiClient";
  */
 export class UserService extends BaseApiClient {
   constructor() {
-    super(
-      Cypress.env("BACKEND_API_BASE_URL") ||
-        "https://automationexercise.com/api",
-    );
+    super(Cypress.env('BACKEND_API_BASE_URL') || 'https://automationexercise.com/api');
   }
 
   /**
@@ -38,7 +35,7 @@ export class UserService extends BaseApiClient {
     mobile_number: string;
   }): Cypress.Chainable<Cypress.Response<any>> {
     const boundary = `----WebKitFormBoundary${Math.random().toString(36).substring(2)}`;
-    let body = "";
+    let body = '';
 
     Object.entries(userData).forEach(([key, value]) => {
       if (value !== undefined) {
@@ -51,19 +48,16 @@ export class UserService extends BaseApiClient {
 
     return cy
       .request({
-        method: "POST",
+        method: 'POST',
         url: `${this.baseUrl}/createAccount`,
         body: body,
         headers: {
-          "Content-Type": `multipart/form-data; boundary=${boundary}`,
+          'Content-Type': `multipart/form-data; boundary=${boundary}`,
         },
         failOnStatusCode: false,
       })
       .then((response) => {
-        if (
-          typeof response.body === "string" &&
-          response.body.trim().startsWith("{")
-        ) {
+        if (typeof response.body === 'string' && response.body.trim().startsWith('{')) {
           response.body = JSON.parse(response.body);
         }
         return response;
@@ -78,16 +72,13 @@ export class UserService extends BaseApiClient {
   getUserByEmail(email: string): Cypress.Chainable<Cypress.Response<any>> {
     return cy
       .request({
-        method: "GET",
+        method: 'GET',
         url: `${this.baseUrl}/getUserDetailByEmail`,
         qs: { email },
         failOnStatusCode: false,
       })
       .then((response) => {
-        if (
-          typeof response.body === "string" &&
-          response.body.trim().startsWith("{")
-        ) {
+        if (typeof response.body === 'string' && response.body.trim().startsWith('{')) {
           response.body = JSON.parse(response.body);
         }
         return response;
@@ -100,12 +91,9 @@ export class UserService extends BaseApiClient {
    * @param {string} password - The user's password
    * @return {Cypress.Chainable<Cypress.Response<any>>} Cypress response containing login verification result
    */
-  verifyLogin(
-    email: string,
-    password: string,
-  ): Cypress.Chainable<Cypress.Response<any>> {
+  verifyLogin(email: string, password: string): Cypress.Chainable<Cypress.Response<any>> {
     const boundary = `----WebKitFormBoundary${Math.random().toString(36).substring(2)}`;
-    let body = "";
+    let body = '';
     body += `--${boundary}\r\n`;
     body += `Content-Disposition: form-data; name="email"\r\n\r\n${email}\r\n`;
     body += `--${boundary}\r\n`;
@@ -114,19 +102,16 @@ export class UserService extends BaseApiClient {
 
     return cy
       .request({
-        method: "POST",
+        method: 'POST',
         url: `${this.baseUrl}/verifyLogin`,
         body: body,
         headers: {
-          "Content-Type": `multipart/form-data; boundary=${boundary}`,
+          'Content-Type': `multipart/form-data; boundary=${boundary}`,
         },
         failOnStatusCode: false,
       })
       .then((response) => {
-        if (
-          typeof response.body === "string" &&
-          response.body.trim().startsWith("{")
-        ) {
+        if (typeof response.body === 'string' && response.body.trim().startsWith('{')) {
           response.body = JSON.parse(response.body);
         }
         return response;
@@ -139,12 +124,9 @@ export class UserService extends BaseApiClient {
    * @param {string} password - The user's password for authentication
    * @return {Cypress.Chainable<Cypress.Response<any>>} Cypress response object
    */
-  deleteUser(
-    email: string,
-    password: string,
-  ): Cypress.Chainable<Cypress.Response<any>> {
+  deleteUser(email: string, password: string): Cypress.Chainable<Cypress.Response<any>> {
     const boundary = `----WebKitFormBoundary${Math.random().toString(36).substring(2)}`;
-    let body = "";
+    let body = '';
     body += `--${boundary}\r\n`;
     body += `Content-Disposition: form-data; name="email"\r\n\r\n${email}\r\n`;
     body += `--${boundary}\r\n`;
@@ -152,11 +134,11 @@ export class UserService extends BaseApiClient {
     body += `--${boundary}--\r\n`;
 
     return cy.request({
-      method: "DELETE",
+      method: 'DELETE',
       url: `${this.baseUrl}/deleteAccount`,
       body: body,
       headers: {
-        "Content-Type": `multipart/form-data; boundary=${boundary}`,
+        'Content-Type': `multipart/form-data; boundary=${boundary}`,
       },
       failOnStatusCode: false,
     });

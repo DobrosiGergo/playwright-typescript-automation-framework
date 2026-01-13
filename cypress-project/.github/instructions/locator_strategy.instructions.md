@@ -1,5 +1,5 @@
 ﻿---
-applyTo: "**"
+applyTo: '**'
 ---
 
 # Cypress Locator Strategy & Selector Patterns Guide

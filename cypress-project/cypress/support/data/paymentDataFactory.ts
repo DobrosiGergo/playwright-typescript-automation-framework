@@ -1,5 +1,5 @@
-import { faker } from "@faker-js/faker";
-import { PaymentData } from "./types";
+import { faker } from '@faker-js/faker';
+import { PaymentData } from './types';
 
 /**
  * Payment Data Factory - Generates test payment data
@@ -15,17 +15,10 @@ export class PaymentDataFactory {
 
     return {
       nameOnCard: faker.person.fullName(),
-      cardNumber: faker.finance
-        .creditCardNumber("#### #### #### ####")
-        .replace(/\s/g, ""),
+      cardNumber: faker.finance.creditCardNumber('#### #### #### ####').replace(/\s/g, ''),
       cvc: faker.finance.creditCardCVV(),
-      expiryMonth: faker.number
-        .int({ min: 1, max: 12 })
-        .toString()
-        .padStart(2, "0"),
-      expiryYear: (
-        currentYear + faker.number.int({ min: 1, max: 5 })
-      ).toString(),
+      expiryMonth: faker.number.int({ min: 1, max: 12 }).toString().padStart(2, '0'),
+      expiryYear: (currentYear + faker.number.int({ min: 1, max: 5 })).toString(),
     };
   }
 
@@ -35,7 +28,7 @@ export class PaymentDataFactory {
    */
   static generateInvalidPaymentData(): Partial<PaymentData> {
     return {
-      nameOnCard: "",
+      nameOnCard: '',
       cardNumber: faker.string.numeric(4),
       cvc: faker.string.numeric(2),
       expiryMonth: faker.number.int({ min: 13, max: 99 }).toString(),

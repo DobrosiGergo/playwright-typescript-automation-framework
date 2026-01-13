@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { BaseComponent } from "../../base/baseComponent";
+import { BaseComponent } from '../../base/baseComponent';
 
 /**
  * PersonalInfoComponent - Handles personal information
@@ -8,10 +8,10 @@ import { BaseComponent } from "../../base/baseComponent";
  * CYPRESS PATTERN: No async/await, returns this for chaining
  */
 export class PersonalInfoComponent extends BaseComponent {
-  readonly firstNameInput = () => this.container.find("#first_name");
-  readonly lastNameInput = () => this.container.find("#last_name");
-  readonly companyInput = () => this.container.find("#company");
-  readonly mobileNumberInput = () => this.container.find("#mobile_number");
+  readonly firstNameInput = () => this.container.find('#first_name');
+  readonly lastNameInput = () => this.container.find('#last_name');
+  readonly companyInput = () => this.container.find('#company');
+  readonly mobileNumberInput = () => this.container.find('#mobile_number');
 
   constructor(containerSelector: string) {
     super(containerSelector);

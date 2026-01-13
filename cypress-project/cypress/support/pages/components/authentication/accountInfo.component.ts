@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { BaseComponent } from "../../base/baseComponent";
+import { BaseComponent } from '../../base/baseComponent';
 
 /**
  * AccountInfoComponent - Handles account setup information
@@ -10,10 +10,10 @@ import { BaseComponent } from "../../base/baseComponent";
 export class AccountInfoComponent extends BaseComponent {
   readonly titleMrRadio = () => this.container.find('input[value="Mr"]');
   readonly titleMrsRadio = () => this.container.find('input[value="Mrs"]');
-  readonly passwordInput = () => this.container.find("#password");
-  readonly daySelect = () => this.container.find("#days");
-  readonly monthSelect = () => this.container.find("#months");
-  readonly yearSelect = () => this.container.find("#years");
+  readonly passwordInput = () => this.container.find('#password');
+  readonly daySelect = () => this.container.find('#days');
+  readonly monthSelect = () => this.container.find('#months');
+  readonly yearSelect = () => this.container.find('#years');
 
   constructor(containerSelector: string) {
     super(containerSelector);
@@ -36,7 +36,7 @@ export class AccountInfoComponent extends BaseComponent {
     birth_month: string;
     birth_year: string;
   }): this {
-    if (accountData.title === "Mr") {
+    if (accountData.title === 'Mr') {
       this.titleMrRadio().check();
     } else {
       this.titleMrsRadio().check();

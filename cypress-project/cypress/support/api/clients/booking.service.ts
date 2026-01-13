@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import { BaseApiClient } from "./baseApiClient";
-import type { Booking, BookingResponse } from "../data/types";
+import { BaseApiClient } from './baseApiClient';
+import type { Booking, BookingResponse } from '../data/types';
 
 /**
  * BookingService - Handles booking CRUD operations for restful-booker API
@@ -10,10 +10,7 @@ import type { Booking, BookingResponse } from "../data/types";
  */
 export class BookingService extends BaseApiClient {
   constructor() {
-    super(
-      Cypress.env("RESTFUL_BOOKER_BASE_URL") ||
-        "https://restful-booker.herokuapp.com",
-    );
+    super(Cypress.env('RESTFUL_BOOKER_BASE_URL') || 'https://restful-booker.herokuapp.com');
   }
 
   /**
@@ -25,7 +22,7 @@ export class BookingService extends BaseApiClient {
     checkin?: string;
     checkout?: string;
   }): Cypress.Chainable<Cypress.Response<any>> {
-    return this.get("/booking", params ? { qs: params } : undefined);
+    return this.get('/booking', params ? { qs: params } : undefined);
   }
 
   /**
@@ -42,13 +39,9 @@ export class BookingService extends BaseApiClient {
    * @param {Booking} bookingData - Booking information (firstname, lastname, dates, etc.)
    * @return {Cypress.Chainable<Cypress.Response<BookingResponse>>} Cypress response containing created booking
    */
-  createBooking(
-    bookingData: Booking,
-  ): Cypress.Chainable<Cypress.Response<BookingResponse>> {
-    cy.log(
-      `API: Creating booking for ${bookingData.firstname} ${bookingData.lastname}`,
-    );
-    return this.post("/booking", {
+  createBooking(bookingData: Booking): Cypress.Chainable<Cypress.Response<BookingResponse>> {
+    cy.log(`API: Creating booking for ${bookingData.firstname} ${bookingData.lastname}`);
+    return this.post('/booking', {
       body: bookingData,
     });
   }
@@ -89,10 +82,7 @@ export class BookingService extends BaseApiClient {
    * @param {string} [token] - Optional authentication token
    * @return {Cypress.Chainable<Cypress.Response<any>>} Cypress response object
    */
-  deleteBooking(
-    bookingId: number,
-    token?: string,
-  ): Cypress.Chainable<Cypress.Response<any>> {
+  deleteBooking(bookingId: number, token?: string): Cypress.Chainable<Cypress.Response<any>> {
     cy.log(`API: Deleting booking ${bookingId}`);
     return this.delete(`/booking/${bookingId}`, {
       headers: token ? { Cookie: `token=${token}` } : undefined,

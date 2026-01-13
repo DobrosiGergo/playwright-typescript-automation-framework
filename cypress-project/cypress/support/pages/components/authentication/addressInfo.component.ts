@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { BaseComponent } from "../../base/baseComponent";
+import { BaseComponent } from '../../base/baseComponent';
 
 /**
  * AddressInfoComponent - Handles address information
@@ -8,12 +8,12 @@ import { BaseComponent } from "../../base/baseComponent";
  * CYPRESS PATTERN: No async/await, returns this for chaining
  */
 export class AddressInfoComponent extends BaseComponent {
-  readonly address1Input = () => this.container.find("#address1");
-  readonly address2Input = () => this.container.find("#address2");
-  readonly countrySelect = () => this.container.find("#country");
-  readonly stateInput = () => this.container.find("#state");
-  readonly cityInput = () => this.container.find("#city");
-  readonly zipcodeInput = () => this.container.find("#zipcode");
+  readonly address1Input = () => this.container.find('#address1');
+  readonly address2Input = () => this.container.find('#address2');
+  readonly countrySelect = () => this.container.find('#country');
+  readonly stateInput = () => this.container.find('#state');
+  readonly cityInput = () => this.container.find('#city');
+  readonly zipcodeInput = () => this.container.find('#zipcode');
 
   constructor(containerSelector: string) {
     super(containerSelector);
@@ -47,7 +47,7 @@ export class AddressInfoComponent extends BaseComponent {
 
     // Select random country from dropdown
     this.countrySelect()
-      .find("option")
+      .find('option')
       .then(($options) => {
         if ($options.length > 0) {
           const randomIndex = Math.floor(Math.random() * $options.length);

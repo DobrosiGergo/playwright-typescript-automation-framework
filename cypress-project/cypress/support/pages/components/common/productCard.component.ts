@@ -1,18 +1,17 @@
 /// <reference types="cypress" />
 
-import { BaseComponent } from "../../base/baseComponent";
+import { BaseComponent } from '../../base/baseComponent';
 
 /**
  * ProductCardComponent - Handles individual product card interactions
  * CYPRESS PATTERN: No async/await, returns this for chaining
  */
 export class ProductCardComponent extends BaseComponent {
-  readonly productImage = () => this.container.find("img").first();
-  readonly productPrice = () => this.container.find("h2");
-  readonly productName = () => this.container.find("p");
-  readonly addToCartButton = () =>
-    this.container.find("[data-product-id]").first();
-  readonly viewProductLink = () => this.container.contains("a", "View Product");
+  readonly productImage = () => this.container.find('img').first();
+  readonly productPrice = () => this.container.find('h2');
+  readonly productName = () => this.container.find('p');
+  readonly addToCartButton = () => this.container.find('[data-product-id]').first();
+  readonly viewProductLink = () => this.container.contains('a', 'View Product');
 
   constructor(containerSelector: string) {
     super(containerSelector);
@@ -23,7 +22,7 @@ export class ProductCardComponent extends BaseComponent {
    * @return {this} Returns this for method chaining
    */
   addToCart(): this {
-    cy.log("Adding product to cart from product card");
+    cy.log('Adding product to cart from product card');
     this.addToCartButton().click({ force: true });
     return this;
   }
@@ -33,7 +32,7 @@ export class ProductCardComponent extends BaseComponent {
    * @return {this} Returns this for method chaining
    */
   viewProduct(): this {
-    cy.log("Viewing product details");
+    cy.log('Viewing product details');
     this.viewProductLink().click();
     return this;
   }
@@ -44,7 +43,7 @@ export class ProductCardComponent extends BaseComponent {
    */
   getProductName(): Cypress.Chainable<string> {
     return this.productName()
-      .invoke("text")
+      .invoke('text')
       .then((text) => text.trim());
   }
 
@@ -54,7 +53,7 @@ export class ProductCardComponent extends BaseComponent {
    */
   getProductPrice(): Cypress.Chainable<string> {
     return this.productPrice()
-      .invoke("text")
+      .invoke('text')
       .then((text) => text.trim());
   }
 
@@ -63,7 +62,7 @@ export class ProductCardComponent extends BaseComponent {
    * @return {this} Returns this for method chaining
    */
   verifyVisible(): this {
-    this.container.should("be.visible");
+    this.container.should('be.visible');
     return this;
   }
 }
@@ -75,15 +74,15 @@ export class ProductCardComponent extends BaseComponent {
  */
 export class ProductCardsListComponent extends BaseComponent {
   // Private locators
-  private readonly bodyElement = () => cy.get("body");
+  private readonly bodyElement = () => cy.get('body');
   private readonly productWrapperByName = (productName: string) =>
-    cy.contains(".product-image-wrapper", productName);
+    cy.contains('.product-image-wrapper', productName);
 
-  readonly productsContainer = () => cy.get(".features_items");
-  readonly productCards = () => cy.get(".product-image-wrapper");
+  readonly productsContainer = () => cy.get('.features_items');
+  readonly productCards = () => cy.get('.product-image-wrapper');
 
   constructor() {
-    super(".features_items"); // Products container
+    super('.features_items'); // Products container
   }
 
   /**
@@ -112,7 +111,7 @@ export class ProductCardsListComponent extends BaseComponent {
    */
   getAllProductNames(): Cypress.Chainable<string[]> {
     return this.productCards()
-      .find("p")
+      .find('p')
       .then(($elements) => {
         const names: string[] = [];
         $elements.each((_, el) => {
@@ -128,7 +127,7 @@ export class ProductCardsListComponent extends BaseComponent {
    */
   getProductCount(): Cypress.Chainable<number> {
     return this.bodyElement().then(($body) => {
-      const cards = $body.find(".product-image-wrapper");
+      const cards = $body.find('.product-image-wrapper');
       return cards.length;
     });
   }
@@ -139,7 +138,7 @@ export class ProductCardsListComponent extends BaseComponent {
    * @return {this} Returns this for method chaining
    */
   verifyProductExists(productName: string): this {
-    this.productWrapperByName(productName).should("exist");
+    this.productWrapperByName(productName).should('exist');
     return this;
   }
 
@@ -148,7 +147,7 @@ export class ProductCardsListComponent extends BaseComponent {
    * @return {this} Returns this for method chaining
    */
   verifyProductsDisplayed(): this {
-    this.productCards().should("have.length.greaterThan", 0);
+    this.productCards().should('have.length.greaterThan', 0);
     return this;
   }
 }

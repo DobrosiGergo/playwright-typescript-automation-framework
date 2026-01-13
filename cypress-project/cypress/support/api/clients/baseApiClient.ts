@@ -1,6 +1,6 @@
 ﻿/// <reference types="cypress" />
 
-type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 interface RequestOptions {
   body?: any;
@@ -27,7 +27,7 @@ export abstract class BaseApiClient {
    * Build full URL from endpoint and base URL
    */
   private buildUrl(endpoint: string): string {
-    const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+    const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
     return `${this.baseUrl}${cleanEndpoint}`;
   }
 
@@ -42,7 +42,7 @@ export abstract class BaseApiClient {
     options?: RequestOptions,
   ): Cypress.Chainable<Cypress.Response<any>> {
     return cy.request({
-      method: "GET",
+      method: 'GET',
       url: this.buildUrl(endpoint),
       headers: options?.headers,
       qs: options?.qs,
@@ -61,7 +61,7 @@ export abstract class BaseApiClient {
     options?: RequestOptions,
   ): Cypress.Chainable<Cypress.Response<any>> {
     return cy.request({
-      method: "POST",
+      method: 'POST',
       url: this.buildUrl(endpoint),
       body: options?.body,
       headers: options?.headers,
@@ -82,7 +82,7 @@ export abstract class BaseApiClient {
     options?: RequestOptions,
   ): Cypress.Chainable<Cypress.Response<any>> {
     return cy.request({
-      method: "PUT",
+      method: 'PUT',
       url: this.buildUrl(endpoint),
       body: options?.body,
       headers: options?.headers,
@@ -102,7 +102,7 @@ export abstract class BaseApiClient {
     options?: RequestOptions,
   ): Cypress.Chainable<Cypress.Response<any>> {
     return cy.request({
-      method: "PATCH",
+      method: 'PATCH',
       url: this.buildUrl(endpoint),
       body: options?.body,
       headers: options?.headers,
@@ -122,7 +122,7 @@ export abstract class BaseApiClient {
     options?: RequestOptions,
   ): Cypress.Chainable<Cypress.Response<any>> {
     return cy.request({
-      method: "DELETE",
+      method: 'DELETE',
       url: this.buildUrl(endpoint),
       body: options?.body,
       headers: options?.headers,
@@ -140,7 +140,7 @@ export abstract class BaseApiClient {
   protected logRequest(method: HttpMethod, endpoint: string, data?: any): void {
     cy.log(`API ${method}: ${endpoint}`);
     if (data) {
-      cy.log("Request Data:", JSON.stringify(data));
+      cy.log('Request Data:', JSON.stringify(data));
     }
   }
 
@@ -150,8 +150,8 @@ export abstract class BaseApiClient {
    */
   protected logResponse(response: Cypress.Response<any>): void {
     cy.log(`Response Status: ${response.status}`);
-    if (Cypress.env("DEBUG_LOGGING") === "true") {
-      cy.log("Response Body:", JSON.stringify(response.body));
+    if (Cypress.env('DEBUG_LOGGING') === 'true') {
+      cy.log('Response Body:', JSON.stringify(response.body));
     }
   }
 }

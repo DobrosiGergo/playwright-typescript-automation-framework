@@ -1,26 +1,26 @@
-import { faker } from "@faker-js/faker";
-import type { AuthCredentials } from "./types";
+import { faker } from '@faker-js/faker';
+import type { AuthCredentials } from './types';
 
 /**
  * Auth API error messages
  */
 export const AUTH_ERROR_MESSAGES = {
-  BAD_CREDENTIALS: "Bad credentials",
+  BAD_CREDENTIALS: 'Bad credentials',
 } as const;
 
 /**
  * Auth API response property names
  */
 export const AUTH_API_PROPERTIES = {
-  TOKEN: "token",
-  REASON: "reason",
+  TOKEN: 'token',
+  REASON: 'reason',
 } as const;
 
 /**
  * Auth response validation constants
  */
 export const AUTH_VALIDATION = {
-  TOKEN_TYPE: "string",
+  TOKEN_TYPE: 'string',
   MIN_TOKEN_LENGTH: 0,
 } as const;
 
@@ -29,8 +29,8 @@ export const AUTH_VALIDATION = {
  */
 export function generateValidCredentials(): AuthCredentials {
   return {
-    username: "admin",
-    password: "password123",
+    username: 'admin',
+    password: 'password123',
   };
 }
 
@@ -49,7 +49,7 @@ export function generateInvalidCredentials(): AuthCredentials {
  */
 export function generateMissingUsernameCredentials(): AuthCredentials {
   return {
-    username: "",
+    username: '',
     password: faker.internet.password(),
   };
 }
@@ -60,6 +60,6 @@ export function generateMissingUsernameCredentials(): AuthCredentials {
 export function generateMissingPasswordCredentials(): AuthCredentials {
   return {
     username: faker.internet.displayName(),
-    password: "",
+    password: '',
   };
 }

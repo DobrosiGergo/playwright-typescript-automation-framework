@@ -1,24 +1,23 @@
 /// <reference types="cypress" />
 
-import { BasePage } from "../base/basePage";
+import { BasePage } from '../base/basePage';
 
 /**
  * CartPage - Shopping cart management
  * CYPRESS PATTERN: No async/await, returns this for chaining
  */
 export class CartPage extends BasePage {
-  protected pageUrl = "/view_cart";
+  protected pageUrl = '/view_cart';
 
   // Private locators
-  private readonly cartInfoTable = () => cy.get("#cart_info_table");
+  private readonly cartInfoTable = () => cy.get('#cart_info_table');
 
   // Selectors
-  readonly cartTableRows = () => cy.get("#cart_info_table tbody tr");
+  readonly cartTableRows = () => cy.get('#cart_info_table tbody tr');
   readonly cartProductRow = (productName: string) =>
-    cy.contains("#cart_info_table tbody tr", productName);
-  readonly proceedToCheckoutButton = () =>
-    cy.contains("a", "Proceed To Checkout");
-  readonly emptyCartMessage = () => cy.contains("Cart is empty!");
+    cy.contains('#cart_info_table tbody tr', productName);
+  readonly proceedToCheckoutButton = () => cy.contains('a', 'Proceed To Checkout');
+  readonly emptyCartMessage = () => cy.contains('Cart is empty!');
 
   /**
    * Get all cart items
@@ -44,7 +43,7 @@ export class CartPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyProductInCart(productName: string): this {
-    this.cartProductRow(productName).should("be.visible");
+    this.cartProductRow(productName).should('be.visible');
     return this;
   }
 
@@ -55,8 +54,8 @@ export class CartPage extends BasePage {
    */
   getProductQuantity(productName: string): Cypress.Chainable<number> {
     return this.cartProductRow(productName)
-      .find(".cart_quantity button")
-      .invoke("text")
+      .find('.cart_quantity button')
+      .invoke('text')
       .then((text) => parseInt(text.trim(), 10));
   }
 
@@ -67,8 +66,8 @@ export class CartPage extends BasePage {
    */
   getProductPrice(productName: string): Cypress.Chainable<string> {
     return this.cartProductRow(productName)
-      .find(".cart_price p")
-      .invoke("text")
+      .find('.cart_price p')
+      .invoke('text')
       .then((text) => text.trim());
   }
 
@@ -79,8 +78,8 @@ export class CartPage extends BasePage {
    */
   getProductTotal(productName: string): Cypress.Chainable<string> {
     return this.cartProductRow(productName)
-      .find(".cart_total_price")
-      .invoke("text")
+      .find('.cart_total_price')
+      .invoke('text')
       .then((text) => text.trim());
   }
 
@@ -90,7 +89,7 @@ export class CartPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   removeProduct(productName: string): this {
-    this.cartProductRow(productName).find(".cart_delete a").click();
+    this.cartProductRow(productName).find('.cart_delete a').click();
     return this;
   }
 
@@ -108,7 +107,7 @@ export class CartPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyCartIsEmpty(): this {
-    this.emptyCartMessage().should("be.visible");
+    this.emptyCartMessage().should('be.visible');
     return this;
   }
 
@@ -117,7 +116,7 @@ export class CartPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyCartHasItems(): this {
-    this.cartTableRows().should("have.length.greaterThan", 0);
+    this.cartTableRows().should('have.length.greaterThan', 0);
     return this;
   }
 
@@ -126,7 +125,7 @@ export class CartPage extends BasePage {
    * @return {this} Returns this for method chaining
    */
   verifyCartTableVisible(): this {
-    this.cartInfoTable().should("be.visible");
+    this.cartInfoTable().should('be.visible');
     return this;
   }
 }

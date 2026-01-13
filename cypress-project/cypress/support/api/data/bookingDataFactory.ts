@@ -1,5 +1,5 @@
-import { faker } from "@faker-js/faker";
-import type { Booking, BookingDates } from "./types";
+import { faker } from '@faker-js/faker';
+import type { Booking, BookingDates } from './types';
 
 /**
  * Booking validation constants
@@ -17,13 +17,9 @@ export class BookingDataFactory {
    * Generate random booking dates (checkin today, checkout in 7 days)
    */
   static generateBookingDates(): BookingDates {
-    const checkin =
-      faker.date.soon({ days: 1 }).toISOString().split("T")[0] ?? "";
+    const checkin = faker.date.soon({ days: 1 }).toISOString().split('T')[0] ?? '';
     const checkout =
-      faker.date
-        .soon({ days: 8, refDate: checkin })
-        .toISOString()
-        .split("T")[0] ?? "";
+      faker.date.soon({ days: 8, refDate: checkin }).toISOString().split('T')[0] ?? '';
 
     return {
       checkin,
@@ -44,11 +40,11 @@ export class BookingDataFactory {
       depositpaid: faker.datatype.boolean(),
       bookingdates: this.generateBookingDates(),
       additionalneeds: faker.helpers.arrayElement([
-        "Breakfast",
-        "Lunch",
-        "Parking",
-        "Late Checkout",
-        "Extra Bed",
+        'Breakfast',
+        'Lunch',
+        'Parking',
+        'Late Checkout',
+        'Extra Bed',
       ]),
       ...overrides,
     };
@@ -65,9 +61,9 @@ export class BookingDataFactory {
       ...original,
       totalprice: original.totalprice + PRICE_INCREASE,
       additionalneeds: faker.helpers.arrayElement([
-        "Breakfast and Lunch",
-        "Dinner and Breakfast",
-        "All Meals Included",
+        'Breakfast and Lunch',
+        'Dinner and Breakfast',
+        'All Meals Included',
       ]),
     };
   }

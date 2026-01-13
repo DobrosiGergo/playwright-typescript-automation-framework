@@ -1,18 +1,15 @@
 /// <reference types="cypress" />
 
-import { BaseComponent } from "../../base/baseComponent";
+import { BaseComponent } from '../../base/baseComponent';
 
 /**
  * SignupFormComponent - Handles initial signup form functionality
  * CYPRESS PATTERN: No async/await, returns this for chaining
  */
 export class SignupFormComponent extends BaseComponent {
-  readonly signupNameInput = () =>
-    this.container.find('input[data-qa="signup-name"]');
-  readonly signupEmailInput = () =>
-    this.container.find('input[data-qa="signup-email"]');
-  readonly signupButton = () =>
-    this.container.find('button[data-qa="signup-button"]');
+  readonly signupNameInput = () => this.container.find('input[data-qa="signup-name"]');
+  readonly signupEmailInput = () => this.container.find('input[data-qa="signup-email"]');
+  readonly signupButton = () => this.container.find('button[data-qa="signup-button"]');
 
   constructor(containerSelector: string) {
     super(containerSelector);
